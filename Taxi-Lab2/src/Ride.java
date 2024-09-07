@@ -21,18 +21,18 @@ public class Ride {
         updateRideStatus(true);
 
     }
-    private Cabbie achacabbie(Cabbie[] taxi){
+    private Cabbie achacabbie(Cabbie[] taxi){// Funcao que pega um taxi aleatório de um vetor de taxi
         Random rnd = new Random();
         int len =  taxi.length;
         int rn3 = rnd.nextInt(len);
         return taxi[rn3];
 
     }
-    private void updateRideStatus(boolean estatus){
+    private void updateRideStatus(boolean estatus){// só seta o estatus da corrida
         if (estatus)this.status = "Em andamento";
         else this.status = "Finalizada";
     }
-    private double calculafare(String args){
+    private double calculafare(String args){// calcula o valor da corrida pelo tamanho da string do destino multipliocada por um valor aleatorio
         Random rnd = new Random();
         int len = rnd.nextInt(30);
         int len2 = args.length();
@@ -44,7 +44,7 @@ public class Ride {
     public double getfare(){
         return this.fare;
     }
-    public void finalizacorrida(Payment pagamento,String metodo){
+    public void finalizacorrida(Payment pagamento,String metodo){// recebe umm objeto pagamento e chama um processo para fazer o pagamento
         pagamento.processapagamento(this.getrideid(),metodo,this.getfare());
         updateRideStatus(false);
     }
