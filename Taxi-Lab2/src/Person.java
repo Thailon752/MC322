@@ -1,9 +1,9 @@
 
 public abstract class Person{
     //Adicionar os atributos da classe Person
-    public String name;
-    public String email;
-    public String phone;
+    private String name;
+    private String email;
+    private String phone;
 
 
     // Métodos a serem implementados da classe Person
