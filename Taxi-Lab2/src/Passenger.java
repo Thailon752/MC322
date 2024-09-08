@@ -9,6 +9,9 @@ public class Passenger extends Person{
         super(name, email, phone); 
         this.userid=userid;
     }
+    public int getUserid() {
+        return userid;
+    }
 
     @Override
     public void update(String field, String newValue){
