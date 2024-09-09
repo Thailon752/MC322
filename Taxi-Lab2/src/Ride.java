@@ -17,7 +17,7 @@ public class Ride {
         this.fare = calculafare(destino);
         Cabbie prov = achacabbie(taxist);
         this.cabbeid = prov.getid();// pode muda o nome depende doque vc fazer
-        prov.getstatus(true);// pode muda o nome depende doque vc fazer
+        prov.getstatus(true);// pode muda o nome depende doque vc fazer //pergunta de thailon-> <tu pegou um get pra setar status isso não seria um setter?> 
         updateRideStatus(true);
 
     }

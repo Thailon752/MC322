@@ -29,6 +29,9 @@ public class Cabbie extends Person{
     public int getCabbieid() {
         return cabbieid;
     }
+    public boolean getstatus(){
+        return this.status;
+    }
     
 
     public float getRating() {
