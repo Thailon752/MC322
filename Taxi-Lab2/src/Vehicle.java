@@ -18,7 +18,9 @@ public class Vehicle {
     public void update(int cabbieid){
         this.cabbieid=cabbieid;
     }
-
+    public String getModel() {
+        return this.model;
+    }
     //Adicionar os métodos da classe VehicleV
 
     //Adicionar os métodos da classe Vehicle
