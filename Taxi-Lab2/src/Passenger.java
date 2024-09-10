@@ -12,6 +12,15 @@ public class Passenger extends Person{
     public int getUserid() {
         return userid;
     }
+    public String getName() {
+        return this.name;
+    }
+    public String getemail(){
+        return this.email;
+    }
+    public String getphone(){
+        return this.phone;
+    }
 
     @Override
     public void update(String field, String newValue){

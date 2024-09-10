@@ -4,12 +4,12 @@ public class Vehicle {
     private final int vehicleid;
     private final String registrationnumber;
     private final String model;
-    private final String year;
+    private final int year;
     private int cabbieid;
 
 
     //Adicionar os atributos da classe Vehicle
-    public Vehicle(int vehicleid, String registrationnumber, String model, String year,int cabbieid ) {
+    public Vehicle(int vehicleid, String registrationnumber, String model, int year,int cabbieid ) {
         this.vehicleid = vehicleid;
         this.registrationnumber = registrationnumber;
         this.model = model;
@@ -17,12 +17,12 @@ public class Vehicle {
         this.cabbieid = cabbieid;
     }
     public String getModel() {
-        return this.model;
+        return this.model; 
     }
     public int getCabbieid() {
         return this.cabbieid;
     }
-    public String getYear() {
+    public int getYear() {
         return this.year;
     }
     public int getVehicleid() {

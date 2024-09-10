@@ -5,7 +5,6 @@ public class Cabbie extends Person{
     private float rating;
     private int numaval;
     private boolean status;
-    private int vehicleid;
 
     //Adicionar os atributos da classe Cabbie
 
@@ -46,6 +45,12 @@ public class Cabbie extends Person{
     
     public String getName() {
         return this.name;
+    }
+    public String getemail(){
+        return this.email;
+    }
+    public String getphone(){
+        return this.phone;
     }
     @Override
     public void update(String field, String newValue){
