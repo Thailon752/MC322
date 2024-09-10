@@ -19,6 +19,18 @@ public class Vehicle {
     public String getModel() {
         return this.model;
     }
+    public int getCabbieid() {
+        return this.cabbieid;
+    }
+    public String getYear() {
+        return this.year;
+    }
+    public int getVehicleid() {
+        return this.vehicleid;
+    }
+    public String getRegistrationnumber() {
+        return this.registrationnumber;
+    }
     //Adicionar os métodos da classe VehicleV
 
     //Adicionar os métodos da classe Vehicle
