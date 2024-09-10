@@ -5,6 +5,8 @@ public class Cabbie extends Person{
     private float rating;
     private int numaval;
     private boolean status;
+    private int vehicleid;
+
     //Adicionar os atributos da classe Cabbie
 
     //Adicionar os métodos da classe Cabbie
@@ -27,7 +29,7 @@ public class Cabbie extends Person{
     }
 
     public int getCabbieid() {
-        return cabbieid;
+        return this.cabbieid;
     }
     public boolean getstatus(){
         return this.status;
@@ -35,7 +37,7 @@ public class Cabbie extends Person{
     
 
     public float getRating() {
-        return rating;
+        return this.rating;
     }
 
     public void setStatus(boolean status) {
@@ -47,6 +49,15 @@ public class Cabbie extends Person{
     }
     @Override
     public void update(String field, String newValue){
+        if (field.equalsIgnoreCase("name")){
+            this.name=newValue;
+        }
+        if (field.equalsIgnoreCase("email")){
+            this.email=newValue;
+        }
+        if (field.equalsIgnoreCase("phone")){
+            this.phone=newValue;
+        }
     
     }
 

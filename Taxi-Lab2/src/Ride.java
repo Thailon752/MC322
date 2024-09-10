@@ -3,7 +3,7 @@ public class Ride {
     //Adicionar os atributos da classe Ride
     private String rideid;
     private String userid;
-    private String cabbeid;
+    private int cabbeid;
     private String vehicleid;
     private String pickupLocation;
     private String droplocation;
@@ -16,8 +16,8 @@ public class Ride {
         this.droplocation = destino;
         this.fare = calculafare(destino);
         Cabbie prov = achacabbie(taxist);
-        this.cabbeid = prov.getid();// pode muda o nome depende doque vc fazer
-        prov.getstatus(true);// pode muda o nome depende doque vc fazer //pergunta de thailon-> <tu pegou um get pra setar status isso não seria um setter?> 
+        this.cabbeid = prov.getCabbieid();// pode muda o nome depende doque vc fazer
+        prov.setStatus(true);// pode muda o nome depende doque vc fazer //pergunta de thailon-> <tu pegou um get pra setar status isso não seria um setter?> 
         updateRideStatus(true);
 
     }

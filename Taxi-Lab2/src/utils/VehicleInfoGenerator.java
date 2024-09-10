@@ -15,7 +15,7 @@ public class VehicleInfoGenerator implements InfoGenerator{
     public VehicleInfoGenerator() {
         this.generateRandomInfo();
     }
-
+    
     public void generateRandomInfo() {
 
         Random ran = new Random();

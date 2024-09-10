@@ -9,14 +9,12 @@ public class Vehicle {
 
 
     //Adicionar os atributos da classe Vehicle
-    public Vehicle(int vehicleid, String registrationnumber, String model, String year ) {
+    public Vehicle(int vehicleid, String registrationnumber, String model, String year,int cabbieid ) {
         this.vehicleid = vehicleid;
         this.registrationnumber = registrationnumber;
         this.model = model;
         this.year = year;
-    }
-    public void update(int cabbieid){
-        this.cabbieid=cabbieid;
+        this.cabbieid = cabbieid;
     }
     public String getModel() {
         return this.model;
