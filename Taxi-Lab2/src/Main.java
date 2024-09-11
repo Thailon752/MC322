@@ -1,3 +1,7 @@
+// João Pedro Rogeri Pavão Ra:242346
+// Thailon Mendes de Oliveira Ra:266861
+
+
 import utils.*;
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -20,13 +24,17 @@ public class Main {
         System.out.printf("Veiculo %d (%s %s) criada com sucesso.\n",carros[i].getVehicleid(),carros[i].getModel(),carros[i].getRegistrationnumber());
       }
       PassengerInfoGenerator a = new PassengerInfoGenerator();
+
       Passenger passageiro = new Passenger(a.getPassengerId(),a.getName(),a.getEmail(),a.getPhone());
       passa[0]= passageiro;
       System.out.printf("Pessoa passsageira %d (%s) criada com sucesso.\n",passa[0].getUserid(),passa[0].getName());
+
       passa[0].update("email",passa[0].getName()+"@outlook.com");
       System.out.printf("Campo 'email' foi atualizado para pessoa %s\n",passa[0].getUserid());
+
       Ride corrida = new Ride();
       corrida.requestRide(passa[0].getUserid(),"Terminal Barao", "Unicamp", taxist);
+      
       Payment pagamento = new Payment();
       corrida.finalizacorrida(pagamento);
 
