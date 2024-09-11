@@ -2,24 +2,25 @@ import java.util.*;
 public class Ride {
     //Adicionar os atributos da classe Ride
     private String rideid;
-    private String userid;
+    private int userid;
     private int cabbeid;
-    private String vehicleid;
+    private int vehicleid;
     private String pickupLocation;
     private String droplocation;
     private String status;
     private double fare;
     //Adicionar os métodos da classe Ride
-    public void requestRide(String Userid,String embarque,String destino,Cabbie[] taxist){
+    public void requestRide(int Userid,String embarque,String destino,Cabbie[] taxist){
         this.userid = Userid;
         this.pickupLocation = embarque;
         this.droplocation = destino;
-        this.fare = calculafare(destino);
+        System.out.printf("Corrida chamada por pessoa passageira %d de %s a %s\n",this.userid,this.pickupLocation,this.droplocation);
         Cabbie prov = achacabbie(taxist);
         this.cabbeid = prov.getCabbieid();// pode muda o nome depende doque vc fazer
+        this.vehicleid = prov.getVehicleId();
+        System.out.printf("Corrida atendida por pessoa motorista %d\n",this.cabbeid);
         prov.setStatus(true);// pode muda o nome depende doque vc fazer //pergunta de thailon-> <tu pegou um get pra setar status isso não seria um setter?> 
         updateRideStatus(true);
-
     }
     private Cabbie achacabbie(Cabbie[] taxi){// Funcao que pega um taxi aleatório de um vetor de taxi
         Random rnd = new Random();
@@ -36,6 +37,7 @@ public class Ride {
         Random rnd = new Random();
         int len = rnd.nextInt(30);
         int len2 = args.length();
+        System.out.printf("Valor da corrida definida por: %.2f\n",(double)(len*len2)/10);
         return (len*len2)/10;
     }
     public String getrideid(){
@@ -44,9 +46,21 @@ public class Ride {
     public double getfare(){
         return this.fare;
     }
-    public void finalizacorrida(Payment pagamento,String metodo){// recebe umm objeto pagamento e chama um processo para fazer o pagamento
-        pagamento.processapagamento(this.getrideid(),metodo,this.getfare());
+    public void finalizacorrida(Payment pagamento){// recebe umm objeto pagamento e chama um processo para fazer o pagamento
+        this.fare =  calculafare(this.pickupLocation+this.droplocation);
+        Scanner sc = new Scanner(System.in);
+        String metodo = "";
+        
+        int a = 0;
+        while (a == 0) {
+            System.out.printf("Forma de pagamento: ");
+            metodo =  sc.nextLine();
+            System.out.printf("Forma de pagamento %s\n",metodo);
+            a = pagamento.processapagamento(this.getrideid(),metodo,this.getfare());
+        }
+        System.err.println("Corrida finalizada.\n");
         updateRideStatus(false);
+        sc.close();
     }
 
 }

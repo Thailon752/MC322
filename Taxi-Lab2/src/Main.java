@@ -16,6 +16,7 @@ public class Main {
       for(int i =0;i<5;i++){
         VehicleInfoGenerator a = new VehicleInfoGenerator();
         Vehicle b = new Vehicle(a.getVehicleId(),a.getRegistrationNumber(),a.getModel(),a.getYear(),taxist[i].getCabbieid());
+        taxist[i].setveiculo(b.getVehicleid());
         carros[i]=b;
         System.out.printf("Veiculo %d (%s %s) criada com sucesso.\n",carros[i].getVehicleid(),carros[i].getModel(),carros[i].getRegistrationnumber());
       }
@@ -23,6 +24,12 @@ public class Main {
       Passenger passageiro = new Passenger(a.getPassengerId(),a.getName(),a.getEmail(),a.getPhone());
       passa[0]= passageiro;
       System.out.printf("Pessoa passsageira %d (%s) criada com sucesso.\n",passa[0].getUserid(),passa[0].getName());
+      passa[0].update("email",passa[0].getName()+"@outlook.com");
+      System.out.printf("Campo 'email' foi atualizado para pessoa %s\n",passa[0].getUserid());
+      Ride corrida = new Ride();
+      corrida.requestRide(passa[0].getUserid(),"Terminal Barao", "Unicamp", taxist);
+      Payment pagamento = new Payment();
+      corrida.finalizacorrida(pagamento);
 
     }
 

@@ -5,6 +5,7 @@ public class Cabbie extends Person{
     private float rating;
     private int numaval;
     private boolean status;
+    private int vehicleid;
 
     //Adicionar os atributos da classe Cabbie
 
@@ -25,6 +26,12 @@ public class Cabbie extends Person{
         this.numaval=this.numaval+1;
         this.rating=((this.rating+avalia)/this.numaval);
 
+    }
+    public void setveiculo(int Idveiculo){
+        this.vehicleid = Idveiculo;
+    }
+    public int getVehicleId(){
+        return this.vehicleid;
     }
 
     public int getCabbieid() {
