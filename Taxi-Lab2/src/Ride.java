@@ -10,7 +10,7 @@ public class Ride {
     private String status;
     private double fare;
     //Adicionar os métodos da classe Ride
-    public void requestRide(int Userid,String embarque,String destino,Cabbie[] taxist){
+    public void requestRide(int Userid,String embarque,String destino,Cabbie[] taxist,Payment pagamento){
         this.userid = Userid;
         this.pickupLocation = embarque;
         this.droplocation = destino;
@@ -18,9 +18,10 @@ public class Ride {
         Cabbie prov = achacabbie(taxist);
         this.cabbeid = prov.getCabbieid();// pode muda o nome depende doque vc fazer
         this.vehicleid = prov.getVehicleId();
-        System.out.printf("Corrida atendida por pessoa motorista %d\n",this.cabbeid);
+        System.out.printf("Corrida atendida por pessoa motorista %d rating %.2f\n",this.cabbeid,prov.getRating());
         prov.setStatus(true);// pode muda o nome depende doque vc fazer //pergunta de thailon-> <tu pegou um get pra setar status isso não seria um setter?> 
         updateRideStatus(true);
+        finalizacorrida(pagamento,prov);
     }
     private Cabbie achacabbie(Cabbie[] taxi){// Funcao que pega um taxi aleatório de um vetor de taxi
         Random rnd = new Random();
@@ -46,11 +47,12 @@ public class Ride {
     public double getfare(){
         return this.fare;
     }
-    public void finalizacorrida(Payment pagamento){// recebe umm objeto pagamento e chama um processo para fazer o pagamento
+    private void finalizacorrida(Payment pagamento,Cabbie taxista){// recebe umm objeto pagamento e chama um processo para fazer o pagamento
         this.fare =  calculafare(this.pickupLocation+this.droplocation);
         Scanner sc = new Scanner(System.in);
         String metodo = "";
-        
+        float note = 0;
+
         int a = 0;
         while (a == 0) {
             System.out.printf("Forma de pagamento: ");
@@ -58,9 +60,13 @@ public class Ride {
             System.out.printf("Forma de pagamento %s\n",metodo);
             a = pagamento.processapagamento(this.getrideid(),metodo,this.getfare());
         }
-        System.err.println("Corrida finalizada.\n");
+        System.err.println("Corrida finalizada.");
+        System.out.print("digite a nota do motorista indo de 0 a 5: ");
+        note = sc.nextFloat();
+        taxista.getaval(note);
         updateRideStatus(false);
         sc.close();
+        
     }
 
 }

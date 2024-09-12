@@ -3,7 +3,6 @@ public class Cabbie extends Person{
     private final int cabbieid;
     private final String licensenumber;
     private float rating;
-    private int numaval;
     private boolean status;
     private int vehicleid;
 
@@ -11,20 +10,20 @@ public class Cabbie extends Person{
 
     //Adicionar os métodos da classe Cabbie
 
-    public Cabbie(int cabbieid,String name,String email,String phone,String licensenumber) {
+    public Cabbie(int cabbieid,String name,String email,String phone,String licensenumber,float rating) {
         super(name, email, phone);
-        this.numaval=0;
-        status=true;
+
+        this.status=true;
         this.licensenumber = licensenumber;
-        this.cabbieid = cabbieid;
+        this.cabbieid = cabbieid;   
+        this.rating = rating;
     }
 
     public void getaval(float avalia){
         calcularating(avalia);
     }
     private void calcularating(float avalia){
-        this.numaval=this.numaval+1;
-        this.rating=((this.rating+avalia)/this.numaval);
+        this.rating=((this.rating+avalia)/2);
 
     }
     public void setveiculo(int Idveiculo){
