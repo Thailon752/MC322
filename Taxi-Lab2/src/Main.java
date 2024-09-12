@@ -12,7 +12,7 @@ public class Main {
       
       for(int i =0;i<5;i++){
         CabbieInfoGenerator a = new CabbieInfoGenerator();
-        Cabbie b = new Cabbie(a.getCabbieId(), a.getName(), a.getEmail(), a.getPhone(), a.getLicenseNumber());
+        Cabbie b = new Cabbie(a.getCabbieId(), a.getName(), a.getEmail(), a.getPhone(), a.getLicenseNumber(), a.getRate());
         taxist[i]=b;
         System.out.printf("Pessoa Motorista %d (%s) criada com sucesso.\n",taxist[i].getCabbieid(),taxist[i].getName());
       }
@@ -33,10 +33,11 @@ public class Main {
       System.out.printf("Campo 'email' foi atualizado para pessoa %s\n",passa[0].getUserid());
 
       Ride corrida = new Ride();
-      corrida.requestRide(passa[0].getUserid(),"Terminal Barao", "Unicamp", taxist);
-      
       Payment pagamento = new Payment();
-      corrida.finalizacorrida(pagamento);
+      corrida.requestRide(passa[0].getUserid(),"Terminal Barao", "Unicamp", taxist,pagamento);
+      
+      
+      
 
     }
 
