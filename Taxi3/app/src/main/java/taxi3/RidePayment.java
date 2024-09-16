@@ -28,6 +28,25 @@ public class RidePayment implements Payment{
      */
     public float calculateValue() {
 
+        switch (this.rideDistance) {
+            case this.rideDistance<=5:
+                
+                break;
+            case this.rideDistance<=10:
+
+                break;
+            case this.rideDistance<=15:
+                break;
+            case this.rideDistance<=20:
+
+                break;
+
+            case this.rideDistance>20:
+            
+            default:
+                break;
+        }
+
         // IMPLEMENTAR METODO CALCULATE VALUE (CONSIDERANDO TAXA DO MÉTODO DE PAGAMENTO)
     }
 
