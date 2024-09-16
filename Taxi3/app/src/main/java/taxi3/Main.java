@@ -1,4 +1,4 @@
-package Taxi3.app.src.main.java.taxi3;
+package Taxi3;
 
 import java.util.ArrayList;
 import java.util.List;
