@@ -1,4 +1,4 @@
-package Taxi3.app.src.main.java.taxi3;
+package taxi3;
 
 public abstract class Person{
     //Adicionar os atributos da classe Person

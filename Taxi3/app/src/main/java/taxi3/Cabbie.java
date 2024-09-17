@@ -1,4 +1,4 @@
-package Taxi3.app.src.main.java.taxi3;
+package taxi3;
 import utils.CabbieInfoGenerator;
 
 public class Cabbie extends Person{

@@ -1,4 +1,4 @@
-package Taxi3;
+package taxi3;
 
 import java.util.ArrayList;
 import java.util.List;

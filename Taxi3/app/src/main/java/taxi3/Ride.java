@@ -1,4 +1,4 @@
-package Taxi3.app.src.main.java.taxi3;
+package taxi3;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
