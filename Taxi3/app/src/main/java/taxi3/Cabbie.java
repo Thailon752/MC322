@@ -3,12 +3,32 @@ import utils.CabbieInfoGenerator;
 
 public class Cabbie extends Person{
     private String cabbieId;
-    private float rate;
+    private float rating;
     private String licenseNumber;
+    private boolean status;
 
 
     public Cabbie() {
     }
+    public float getRate() {
+        return rating;
+    }
+    
+    public void getaval(float avalia){
+        calcularating(avalia);
+    }
+    private void calcularating(float avalia){
+        this.rating=((this.rating+avalia)/2);
+
+    }
+
+    public String getCabbieid() {
+        return this.cabbieId;
+    }
+    public boolean getstatus(){
+        return this.status;
+    }
+    
 
     
     /**
@@ -25,7 +45,7 @@ public class Cabbie extends Person{
         this.email = cab.getEmail();
         this.phone = cab.getPhone();
         this.cabbieId = cab.getCabbieId();
-        this.rate = cab.getRate();
+        this.rating = cab.getRate();
         this.licenseNumber = cab.getLicenseNumber();
         System.out.println("Pessoa motorista " + this.cabbieId + " (" + this.name + ") criada com sucesso");
     
@@ -68,7 +88,7 @@ public class Cabbie extends Person{
                 this.cabbieId = newValue;
                 break;
             case "rate":
-                this.rate = Float.parseFloat(newValue);
+                this.rating = Float.parseFloat(newValue);
                 break;
             case "licenseNumber":
                 this.licenseNumber = newValue;
