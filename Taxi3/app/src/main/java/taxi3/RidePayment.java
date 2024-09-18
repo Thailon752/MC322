@@ -1,15 +1,17 @@
 package taxi3;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class RidePayment implements Payment{
     
-    private String paymentId;
-    private String rideId;
-    private LocalDateTime rideStartTime;
-    private float rideDistance;
+    private final String paymentId;
+    private final String rideId;
+    private final LocalDateTime rideStartTime;
+    private final float rideDistance;
     private float amount;
-    private PaymentOption paymentMethod;
+    private final PaymentOption paymentMethod;
 
 
        
@@ -20,11 +22,12 @@ public class RidePayment implements Payment{
         this.rideStartTime = datahora;
         this.rideDistance = distancia;
         this.paymentMethod = PaymentOption.valueOf(metodopag);
+        this.paymentId = UUID.randomUUID().toString();
         calcula_value();
     }
 
     private String noite_dia(LocalDateTime horario){
-        if(this.rideStartTime.getHour()<=19 && this.rideStartTime.getHour()<=5){
+        if(this.rideStartTime.getHour()<=18 && this.rideStartTime.getHour()<=5){
             return "Diurno";
         }
         else{
@@ -103,16 +106,16 @@ public class RidePayment implements Payment{
         return this.paymentId;
     }
     public  String getrideid(){
-        return this.paymentId;
+        return this.rideId;
     }
 
     /**
      * Processa o pagamento da corrida.
     */
     @Override
-    public void processPayment() {
-        
-        // IMPLEMENTAR METODO PROCESS PAYMENT
+    public void processPayment(ArrayList<RidePayment> Pagamentos) {
+        Pagamentos.add(this);
+        System.out.println("Pagamento realizado com sucesso!");
     }
 
 

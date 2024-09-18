@@ -1,4 +1,5 @@
 package taxi3;
+import java.util.ArrayList;
 public interface Payment {
     
     // INTERFACE PAYMENT 
@@ -7,6 +8,6 @@ public interface Payment {
     public abstract PaymentOption getoption();
     public abstract String getpayid();
     public abstract String getrideid();
-    public abstract void processPayment();
+    public abstract void processPayment(ArrayList<RidePayment> payments);
     
 }

@@ -13,7 +13,7 @@ public class Main {
         List<Cabbie> inUsageCabbies = new ArrayList<>();
         List<Passenger> passengers = new ArrayList<>();
         List<Vehicle> vehicles = new ArrayList<>();
-
+        ArrayList<RidePayment> pagamentos = new ArrayList<>();
         // Create Instances
 
         Cabbie cab = new Cabbie();
@@ -52,7 +52,7 @@ public class Main {
 
         //Payment
         RidePayment payment = new RidePayment(ride.getRideId(), ride.getStartTime(), ride.getRideDistance(), "Cartão de Crédito");
-        payment.processPayment();
+        payment.processPayment(pagamentos);
 
         //Finish Ride
         ride.completeRide();
@@ -73,7 +73,7 @@ public class Main {
  
          //Payment
          RidePayment payment2 = new RidePayment(ride_2.getRideId(), ride_2.getStartTime(), ride_2.getRideDistance(), "Pix");
-         payment2.processPayment();
+         payment2.processPayment(pagamentos);
  
          //Finish Ride
          ride.completeRide();
