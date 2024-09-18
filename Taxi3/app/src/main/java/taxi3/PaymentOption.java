@@ -3,9 +3,9 @@ package taxi3;
 public enum PaymentOption {
 
     // IMPLEMENTAÇÃO ENUM PAYMENT OPTION
-    CreditCard("Credit Card",6),
-    DebitCard("Debit Card",4),
-    Cash("Cash",0),
+    CreditCard("Cartão de Crédito",6),
+    DebitCard("Cartão de Débito",4),
+    Cash("Dinheiro",0),
     Pix("Pix",1),
     Voucher("Voucher",3);
 

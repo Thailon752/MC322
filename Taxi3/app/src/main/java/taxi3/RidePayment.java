@@ -1,8 +1,6 @@
 package taxi3;
-import java.util.UUID;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class RidePayment implements Payment{
     
@@ -16,6 +14,14 @@ public class RidePayment implements Payment{
 
        
     // IMPLEMENTAR CONSTRUTUOR DA CLASS
+
+    public RidePayment(String corridId,LocalDateTime datahora, float distancia,String metodopag){
+        this.rideId =  corridId;
+        this.rideStartTime = datahora;
+        this.rideDistance = distancia;
+        this.paymentMethod = PaymentOption.valueOf(metodopag);
+        calcula_value();
+    }
 
     private String noite_dia(LocalDateTime horario){
         if(this.rideStartTime.getHour()<=19 && this.rideStartTime.getHour()<=5){
