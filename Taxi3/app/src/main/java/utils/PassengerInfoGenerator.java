@@ -1,8 +1,7 @@
 package utils;
-import java.util.Randomandomandom;
+import java.util.Random;
 import java.util.UUID;
-import java.util.UUID;
-import java.util.UUID;
+
 
 
 public class PassengerInfoGenerator implements InfoGenerator{

@@ -14,7 +14,7 @@ public class Cabbie extends Person{
         return rating;
     }
     
-    public void getaval(float avalia){
+    public void setaval(float avalia){
         calcularating(avalia);
     }
     private void calcularating(float avalia){
@@ -125,7 +125,7 @@ public class Cabbie extends Person{
      */
     @Override
     public String toString() {
-        return String.format(this.email, this.name, this.phone, this.cabbieId, this.rate, this.licenseNumber);
+        return String.format(this.email, this.name, this.phone, this.cabbieId, this.rating, this.licenseNumber);
     }
 
 
