@@ -35,11 +35,82 @@ public class Ride {
      * 
      * A message is printed to the console with the information of the ride.
      */
+    public String getCabbieId() {
+        return cabbieId;
+    }
 
-    public void requestRide(String pickupLocation, String dropLocation) {
+    public String getPassengerId() {
+        return passengerId;
+    }
+    public String getVehicleId() {
+        return vehicleId;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void requestRide(String pickupLocationName, String dropLocationName) {
+        switch (pickupLocationName.toUpperCase()) {
+            case "AEROPORTO":
+                this.pickupLocation = Location.AEROPORTO;
+                break;
+            case "ESTACAO_DE_TREM":
+                this.pickupLocation = Location.ESTACAO_DE_TREM;
+                break;
+            case "SHOPPING":
+                this.pickupLocation = Location.SHOPPING;
+                break;
+            case "ESCOLA":
+                this.pickupLocation = Location.ESCOLA;
+                break;
+            case "PARQUE":
+                this.pickupLocation = Location.PARQUE;
+                break;
+            case "HOSPITAL":
+                this.pickupLocation = Location.HOSPITAL;
+                break;
+            case "BIBLIOTECA":
+                this.pickupLocation = Location.BIBLIOTECA;
+                break;
+            case "ESTADIO":
+                this.pickupLocation = Location.ESTADIO;
+                break;
+            default:
+                System.out.println("Localização de pickup não encontrada.");
+                return;
+        }
 
-        // IMPLEMENTAR METODO REQUEST RIDE (JAVADOC PARA GUIAR SE PRECISAR)
-        
+        switch (dropLocationName.toUpperCase()) {
+            case "AEROPORTO":
+                this.dropLocation = Location.AEROPORTO;
+                break;
+            case "ESTACAO_DE_TREM":
+                this.dropLocation = Location.ESTACAO_DE_TREM;
+                break;
+            case "SHOPPING":
+                this.dropLocation = Location.SHOPPING;
+                break;
+            case "ESCOLA":
+                this.dropLocation = Location.ESCOLA;
+                break;
+            case "PARQUE":
+                this.dropLocation = Location.PARQUE;
+                break;
+            case "HOSPITAL":
+                this.dropLocation = Location.HOSPITAL;
+                break;
+            case "BIBLIOTECA":
+                this.dropLocation = Location.BIBLIOTECA;
+                break;
+            case "ESTADIO":
+                this.dropLocation = Location.ESTADIO;
+                break;
+            default:
+                System.out.println("Localização de drop não encontrada.");
+                return;
+        }
+
+        System.out.println("Corrida solicitada de " + this.pickupLocation.getNome() +
+                           " para " + this.dropLocation.getNome());
     }
 
 
