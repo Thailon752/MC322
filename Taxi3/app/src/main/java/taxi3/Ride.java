@@ -49,7 +49,6 @@ public class Ride {
         return status;
     }
     public void requestRide(String pickupLocationName, String dropLocationName) {
-        // Definindo a localização de pickup
         switch (pickupLocationName.toUpperCase()) {
             case "AEROPORTO":
                 this.pickupLocation = Location.AEROPORTO;
