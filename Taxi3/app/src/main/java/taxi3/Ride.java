@@ -51,7 +51,7 @@ public class Ride {
      * @return the calculated distance.
      */
     public float calculateDistance() {
-        
+        return 1;
         // IMPLEMENTAR METODO CALCULATE DISTANCE
     }
 

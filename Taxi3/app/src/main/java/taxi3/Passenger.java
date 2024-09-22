@@ -5,9 +5,6 @@ import utils.PassengerInfoGenerator;
 public class Passenger extends Person{
     private String passengerId;
 
-    public Passenger() {
-    }
-
     /**
      * Registers a passenger by generating random information.
      * This method assigns a random email, name, phone number, and user ID to the passenger.

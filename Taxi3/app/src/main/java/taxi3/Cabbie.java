@@ -7,9 +7,6 @@ public class Cabbie extends Person{
     private String licenseNumber;
     private boolean status;
 
-
-    public Cabbie() {
-    }
     public float getRate() {
         return rating;
     }

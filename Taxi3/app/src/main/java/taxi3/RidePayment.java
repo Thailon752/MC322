@@ -25,6 +25,14 @@ public class RidePayment implements Payment{
         this.paymentId = UUID.randomUUID().toString();
         calcula_value();
     }
+    
+    /**
+     * Com base na hora do dia, retorna se é Dia ou noite.
+     * 
+     * Usa a Localdatetime para saber a hora
+     * 
+     * @return uma string com o periodo do dia
+     */
 
     private String noite_dia(LocalDateTime horario){
         if(this.rideStartTime.getHour()<=18 && this.rideStartTime.getHour()<=5){
@@ -36,11 +44,11 @@ public class RidePayment implements Payment{
     }
 
     /**
-     * Calculates the value of the ride.
+     * Calcula o valor da corrida
      * 
-     * The value is calculated using the price table
+     * Usando a tabela para fazer as contas dependendo da distancia
      * 
-     * @return the calculated value of the ride.
+     * @return o valor da corrida.
      */
     
     private float valor_da_corrida() {
@@ -88,6 +96,17 @@ public class RidePayment implements Payment{
         }
         return valor;
     }
+    
+    /**
+     * Calcula o total a ser pago
+     * 
+     * Usa a função valor_da_corrida para saber o valor por distancia e 
+     * acrescenta a taxa dependendo do tipo de pagamento.
+     * 
+     * Usa a tabela de taxas
+     * 
+     * E seta a quantidade a pagar pela corrida no objeto
+     */
     private void calcula_value(){
         this.amount = valor_da_corrida()+paymentMethod.gettaxa()*valor_da_corrida();
 
@@ -111,6 +130,7 @@ public class RidePayment implements Payment{
 
     /**
      * Processa o pagamento da corrida.
+     * Guardando o objeto dentro de um Array fornecido e printando um sinal de pagamaento realizado
     */
     @Override
     public void processPayment(ArrayList<RidePayment> Pagamentos) {
