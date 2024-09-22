@@ -1,7 +1,6 @@
 package taxi3;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class Ride {
     
@@ -40,6 +39,7 @@ public class Ride {
     public void requestRide(String pickupLocation, String dropLocation) {
 
         // IMPLEMENTAR METODO REQUEST RIDE (JAVADOC PARA GUIAR SE PRECISAR)
+        
     }
 
 
@@ -50,10 +50,16 @@ public class Ride {
      * 
      * @return the calculated distance.
      */
-    public float calculateDistance() {
-        
-        // IMPLEMENTAR METODO CALCULATE DISTANCE
+
+     public float calculateDistance(Location locini, Location locfin) {
+        float varx, vary, varf;    
+        varx = locfin.getCoordenadaX() - locini.getCoordenadaX();
+        vary = locfin.getCoordenadaY() - locini.getCoordenadaY();
+        varf = (float) Math.sqrt(Math.pow(varx, 2) + Math.pow(vary, 2));  
+        return varf;
     }
+    
+    
 
 
     /**
@@ -71,6 +77,10 @@ public class Ride {
     public void updateRideStatus(String status, String cabbieId, String vehicleId) {
         
         // IMPLEMENTAR METODO UPDATE RIDE STATUS
+        this.status = status;
+        this.cabbieId = cabbieId;
+        this.vehicleId = vehicleId;
+
 
     }
 
