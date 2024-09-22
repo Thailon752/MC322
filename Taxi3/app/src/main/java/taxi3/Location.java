@@ -5,7 +5,7 @@ public enum Location {
     // IMPLEMENTAÇÃO ENUM LOCATION
 
     AEROPORTO("Aeroporto", 5, 18),
-    ESTACAO_DE_TREM("Estação de Trem", 12, 8),
+    ESTAÇÃODETREM("Estação de Trem", 12, 8),
     SHOPPING("Shopping", 20, 7),
     ESCOLA("Escola", 6, 23),
     PARQUE("Parque", 0, 4),

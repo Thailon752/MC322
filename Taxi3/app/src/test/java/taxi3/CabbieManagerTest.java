@@ -49,7 +49,7 @@ public class CabbieManagerTest {
         // Arrange
         ride = new Ride("testPassengerId");
         ride.setPickupLocation(Location.HOSPITAL);
-        ride.setDropLocation(Location.ESTACAO_DE_TREM);
+        ride.setDropLocation(Location.ESTAÇÃODETREM);
 
         // Act
         float distance = ride.calculateDistance();

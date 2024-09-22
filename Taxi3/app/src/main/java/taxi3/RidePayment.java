@@ -21,10 +21,15 @@ public class RidePayment implements Payment{
         this.rideId =  corridId;
         this.rideStartTime = datahora;
         this.rideDistance = distancia;
-        this.paymentMethod = PaymentOption.valueOf(metodopag);
+        this.paymentMethod = PaymentOption.valueOf(normalizar(metodopag));
         this.paymentId = UUID.randomUUID().toString();
         calcula_value();
     }
+
+    private String normalizar(String texto) {
+        return texto.trim().replaceAll("\\s+", "").toUpperCase();
+    }
+    
     
     /**
      * Com base na hora do dia, retorna se é Dia ou noite.

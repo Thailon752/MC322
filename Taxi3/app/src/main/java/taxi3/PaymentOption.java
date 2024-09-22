@@ -3,11 +3,11 @@ package taxi3;
 public enum PaymentOption {
 
     // IMPLEMENTAÇÃO ENUM PAYMENT OPTION
-    CreditCard("Cartão de Crédito",6),
-    DebitCard("Cartão de Débito",4),
-    Cash("Dinheiro",0),
-    Pix("Pix",1),
-    Voucher("Voucher",3);
+    CARTÃODECRÉDITO("Cartão de Crédito",6),
+    CARTÃODEDÉBITO("Cartão de Débito",4),
+    DINHEIRO("Dinheiro",0),
+    PIX("Pix",1),
+    VOUCHER("Voucher",3);
 
     private final String nome;
     private final int taxa;
