@@ -18,14 +18,14 @@ public enum PaymentOption {
     }
 
     public String getnome(){
-        return nome;
+        return this.nome;
     }
     public int gettaxa(){
-        return taxa;
+        return this.taxa;
     }
 
     public String info(){
-        return String.format("%s taxa de %d", nome,taxa);
+        return String.format("%s taxa de %d", this.nome,this.taxa);
     }
 
 }

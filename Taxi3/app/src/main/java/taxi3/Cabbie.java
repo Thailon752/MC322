@@ -25,6 +25,9 @@ public class Cabbie extends Person{
     public boolean getstatus(){
         return this.status;
     }
+    public String getLicensenumber(){
+       return this.licenseNumber;
+    }
     
 
     
