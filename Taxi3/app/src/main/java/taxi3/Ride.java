@@ -125,10 +125,10 @@ public class Ride {
      * @return the calculated distance.
      */
 
-     public float calculateDistance(Location locini, Location locfin) {
+     public float calculateDistance() {
         float varx, vary, varf;    
-        varx = locfin.getCoordenadaX() - locini.getCoordenadaX();
-        vary = locfin.getCoordenadaY() - locini.getCoordenadaY();
+        varx = dropLocation.getCoordenadaX() - pickupLocation.getCoordenadaX();
+        vary = dropLocation.getCoordenadaY() - pickupLocation.getCoordenadaY();
         varf = (float) Math.sqrt(Math.pow(varx, 2) + Math.pow(vary, 2));  
         return varf;
     }
