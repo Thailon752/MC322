@@ -28,6 +28,9 @@ public class Cabbie extends Person{
     public String getLicensenumber(){
        return this.licenseNumber;
     }
+    public void getaval(float avalia){
+        calcularating(avalia);
+    }    
     
 
     

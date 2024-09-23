@@ -1,6 +1,6 @@
 package taxi3;
-
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Ride {
     
@@ -49,12 +49,14 @@ public class Ride {
         return status;
     }
     public void requestRide(String pickupLocationName, String dropLocationName) {
+        this.startTime = LocalDateTime.now();
+        this.status = "iniciada";
         switch (pickupLocationName.toUpperCase()) {
             case "AEROPORTO":
                 this.pickupLocation = Location.AEROPORTO;
                 break;
             case "ESTACAO_DE_TREM":
-                this.pickupLocation = Location.ESTACAO_DE_TREM;
+                this.pickupLocation = Location.ESTAÇÃODETREM;
                 break;
             case "SHOPPING":
                 this.pickupLocation = Location.SHOPPING;
@@ -84,7 +86,7 @@ public class Ride {
                 this.dropLocation = Location.AEROPORTO;
                 break;
             case "ESTACAO_DE_TREM":
-                this.dropLocation = Location.ESTACAO_DE_TREM;
+                this.dropLocation = Location.ESTAÇÃODETREM;
                 break;
             case "SHOPPING":
                 this.dropLocation = Location.SHOPPING;
@@ -108,9 +110,10 @@ public class Ride {
                 System.out.println("Localização de drop não encontrada.");
                 return;
         }
-
         System.out.println("Corrida solicitada de " + this.pickupLocation.getNome() +
-                           " para " + this.dropLocation.getNome());
+        " para " + this.dropLocation.getNome() +
+        " às " + this.startTime.getHour() + ":" + String.format("%02d", this.startTime.getMinute()));
+
     }
 
 
@@ -148,15 +151,27 @@ public class Ride {
     public void updateRideStatus(String status, String cabbieId, String vehicleId) {
         
         // IMPLEMENTAR METODO UPDATE RIDE STATUS
-        this.status = status;
-        this.cabbieId = cabbieId;
-        this.vehicleId = vehicleId;
+        if (status.equalsIgnoreCase("ACEPTED")){
+            this.status =  "em corrida";
+            this.cabbieId = cabbieId;
+            this.vehicleId = vehicleId;
+
+        }
+        
 
 
     }
 
-    public void completeRide() {
+    public void completeRide(Cabbie motora) {
+        this.status = "finalizada";
+        float note = 0;
+        Scanner sc = new Scanner(System.in);
+        System.err.println("Corrida finalizada.");
+        System.out.print("digite a nota do motorista indo de 0 a 5: ");
+        note = sc.nextFloat();
+        motora.getaval(note);
         System.out.println("Corrida finalizada");
+        sc.close();
 
     }
 
