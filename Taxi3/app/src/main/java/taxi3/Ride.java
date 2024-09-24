@@ -143,8 +143,10 @@ public class Ride {
         varx = dropLocation.getCoordenadaX() - pickupLocation.getCoordenadaX();
         vary = dropLocation.getCoordenadaY() - pickupLocation.getCoordenadaY();
         varf = (float) Math.sqrt(Math.pow(varx, 2) + Math.pow(vary, 2));
-        this.distance = varf;
-        return varf;
+        float distanceTruncated = (float) ((int) (varf * 100)) / 100;
+
+        this.distance = distanceTruncated;
+        return distanceTruncated;
     }
     
     
