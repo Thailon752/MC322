@@ -1,5 +1,7 @@
 package taxi3;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ride {
@@ -38,6 +40,13 @@ public class Ride {
     public String getCabbieId() {
         return cabbieId;
     }
+    // Método para normalizar o nome da localização (remover acentos e espaços)
+    private String normalizeLocationName(String locationName) {
+        locationName = Normalizer.normalize(locationName, Normalizer.Form.NFD);
+        locationName = locationName.replaceAll("[^\\p{ASCII}]", ""); 
+        return locationName.replaceAll("\\s", "").toUpperCase(); 
+}
+
 
     public String getPassengerId() {
         return passengerId;
@@ -50,12 +59,14 @@ public class Ride {
     }
     public void requestRide(String pickupLocationName, String dropLocationName) {
         this.startTime = LocalDateTime.now();
-        this.status = "iniciada";
+        this.status = "Solicitada";
+        pickupLocationName = normalizeLocationName(pickupLocationName);
+        dropLocationName = normalizeLocationName(dropLocationName);
         switch (pickupLocationName.toUpperCase()) {
             case "AEROPORTO":
                 this.pickupLocation = Location.AEROPORTO;
                 break;
-            case "ESTACAO_DE_TREM":
+            case "ESTACAODETREM":
                 this.pickupLocation = Location.ESTAÇÃODETREM;
                 break;
             case "SHOPPING":
@@ -85,7 +96,7 @@ public class Ride {
             case "AEROPORTO":
                 this.dropLocation = Location.AEROPORTO;
                 break;
-            case "ESTACAO_DE_TREM":
+            case "ESTACAODETREM":
                 this.dropLocation = Location.ESTAÇÃODETREM;
                 break;
             case "SHOPPING":
@@ -110,8 +121,10 @@ public class Ride {
                 System.out.println("Localização de drop não encontrada.");
                 return;
         }
+        calculateDistance();
+        System.out.println("Status: " + this.status);
         System.out.println("Corrida solicitada de " + this.pickupLocation.getNome() +
-        " para " + this.dropLocation.getNome() +
+        " para " + this.dropLocation.getNome() + " (" + String.format("%02f", this.distance)+ "km)" +
         " às " + this.startTime.getHour() + ":" + String.format("%02d", this.startTime.getMinute()));
 
     }
@@ -129,7 +142,8 @@ public class Ride {
         float varx, vary, varf;    
         varx = dropLocation.getCoordenadaX() - pickupLocation.getCoordenadaX();
         vary = dropLocation.getCoordenadaY() - pickupLocation.getCoordenadaY();
-        varf = (float) Math.sqrt(Math.pow(varx, 2) + Math.pow(vary, 2));  
+        varf = (float) Math.sqrt(Math.pow(varx, 2) + Math.pow(vary, 2));
+        this.distance = varf;
         return varf;
     }
     
@@ -151,7 +165,7 @@ public class Ride {
     public void updateRideStatus(String status, String cabbieId, String vehicleId) {
         
         // IMPLEMENTAR METODO UPDATE RIDE STATUS
-        if (status.equalsIgnoreCase("ACEPTED")){
+        if (status.equalsIgnoreCase("ACEITA")){
             this.status =  "em corrida";
             this.cabbieId = cabbieId;
             this.vehicleId = vehicleId;
@@ -161,19 +175,28 @@ public class Ride {
 
 
     }
-
     public void completeRide(Cabbie motora) {
-        this.status = "finalizada";
-        float note = 0;
-        Scanner sc = new Scanner(System.in);
-        System.err.println("Corrida finalizada.");
-        System.out.print("digite a nota do motorista indo de 0 a 5: ");
-        note = sc.nextFloat();
-        motora.getaval(note);
-        System.out.println("Corrida finalizada");
-        sc.close();
+    this.status = "finalizada";
+    float note = -1; 
+    Scanner sc = new Scanner(System.in);  
+    System.err.println("Corrida finalizada.");
 
+    while (note < 0 || note > 5) {
+        try {
+            System.out.print("Digite a nota do motorista indo de 0 a 5: ");
+            note = sc.nextFloat();
+            if (note < 0 || note > 5) {
+                System.out.println("Por favor, insira uma nota válida entre 0 e 5.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida. Por favor, insira um número entre 0 e 5.");
+            sc.next();  // Limpar a entrada inválida
+        }
     }
+
+    motora.getaval(note);  // Passa a nota para o motorista
+    System.out.println("Corrida finalizada");
+}
 
     /**
      * Sets the pickup location of this ride.
