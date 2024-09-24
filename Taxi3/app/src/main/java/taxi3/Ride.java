@@ -194,12 +194,10 @@ public class Ride {
                 System.out.println("Entrada inválida. Por favor, insira um número entre 0 e 5.");
                 sc.next();  // Limpar a entrada inválida
             }
-        sc.close();
+        }
+        motora.getaval(note);  // Passa a nota para o motorista
+        System.out.println("Corrida finalizada");
     }
-
-    motora.getaval(note);  // Passa a nota para o motorista
-    System.out.println("Corrida finalizada");
-}
 
     /**
      * Sets the pickup location of this ride.

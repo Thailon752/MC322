@@ -72,7 +72,6 @@ public class Main {
          ride_2.updateRideStatus("ACEITA", inUsageCabbies.get(0).getCabbieId(), vehicles.get(0).getVehicleId());
          ride_2.updateRideStatus("EM_PROGRESSO", null, null);
  
- 
          //Payment
          RidePayment payment2 = new RidePayment(ride_2.getRideId(), ride_2.getStartTime(), ride_2.getRideDistance(), "Pix");
          payment2.processPayment(pagamentos);
