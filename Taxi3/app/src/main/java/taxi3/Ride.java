@@ -178,22 +178,23 @@ public class Ride {
 
     }
     public void completeRide(Cabbie motora) {
-    this.status = "finalizada";
-    float note = -1; 
-    Scanner sc = new Scanner(System.in);  
-    System.err.println("Corrida finalizada.");
+        this.status = "finalizada";
+        float note = -1; 
+        Scanner sc = new Scanner(System.in);  
+        System.err.println("Corrida finalizada.");
 
-    while (note < 0 || note > 5) {
-        try {
-            System.out.print("Digite a nota do motorista indo de 0 a 5: ");
-            note = sc.nextFloat();
-            if (note < 0 || note > 5) {
-                System.out.println("Por favor, insira uma nota válida entre 0 e 5.");
+        while (note < 0 || note > 5) {
+            try {
+                System.out.print("Digite a nota do motorista indo de 0 a 5: ");
+                note = sc.nextFloat();
+                if (note < 0 || note > 5) {
+                    System.out.println("Por favor, insira uma nota válida entre 0 e 5.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, insira um número entre 0 e 5.");
+                sc.next();  // Limpar a entrada inválida
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida. Por favor, insira um número entre 0 e 5.");
-            sc.next();  // Limpar a entrada inválida
-        }
+        sc.close();
     }
 
     motora.getaval(note);  // Passa a nota para o motorista
