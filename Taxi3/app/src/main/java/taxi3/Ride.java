@@ -177,7 +177,7 @@ public class Ride {
 
 
     }
-    public void completeRide(Cabbie motora) {
+    public void completeRide(Cabbie motora, boolean fecha) {
         this.status = "finalizada";
         float note = -1; 
         Scanner sc = new Scanner(System.in);  
@@ -197,6 +197,13 @@ public class Ride {
         }
         motora.getaval(note);  // Passa a nota para o motorista
         System.out.println("Corrida finalizada");
+        if(fecha){
+            fecha_scanner(sc);
+        }
+    }
+
+    private void fecha_scanner(Scanner sc){
+        sc.close();
     }
 
     /**

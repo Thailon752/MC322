@@ -57,7 +57,7 @@ public class Main {
         payment.processPayment(pagamentos);
 
         //Finish Ride
-        ride.completeRide(cab);
+        ride.completeRide(cab,false);
         inUsageCabbies.remove(0);
         availableCabbies.add(cab);
 
@@ -77,7 +77,7 @@ public class Main {
          payment2.processPayment(pagamentos);
  
          //Finish Ride
-         ride.completeRide(cab);
+         ride.completeRide(cab,true);
          inUsageCabbies.remove(0);
          availableCabbies.add(cab);
 
