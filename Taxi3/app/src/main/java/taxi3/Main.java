@@ -2,8 +2,13 @@ package taxi3;
 // Thailon Mendes De OLiveira RA:266861
 // João Pedro Rogeri Pavão RA:242346
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -32,6 +37,26 @@ public class Main {
         availableCabbies.add(cab);
         passengers.add(p);
         vehicles.add(v);
+
+        
+
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(Passenger.class);
+            Marshaller marshaller = jaxbContext.createMarshaller();
+
+            
+            File file = new File("arquivos_xml/passengers.xml");
+
+    
+            file.getParentFile().mkdirs();
+
+    
+            marshaller.marshal(passengers, file);
+
+            System.out.println("Arquivo salvo com sucesso!");
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            }
 
 
         // Update Instances
