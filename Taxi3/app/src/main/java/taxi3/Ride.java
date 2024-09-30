@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Ride {
     
     private String rideId;
