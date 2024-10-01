@@ -58,7 +58,7 @@ public class CabbieManagerTest {
         // Arrange
         ride = new Ride("testPassengerId");
         ride.setPickupLocation(Location.HOSPITAL);
-        ride.setDropLocation(Location.ESTACAO_DE_TREM);
+        ride.setDropLocation(Location.ESTAÇÃODETREM);
 
         // Act
         float distance = ride.calculateDistance();
@@ -70,19 +70,19 @@ public class CabbieManagerTest {
     @Test
     public void testDiurnalRideWithinRange() {
         RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 5.0f, "Dinheiro");
-        Assertions.assertEquals(15.00f, ridePayment.calculateValue(), 0);
+        Assertions.assertEquals(15.00f, ridePayment.getamont(), 0);
     }
 
     @Test
     public void testDiurnalRideWithinRange2() {
         RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 18.0f, "Cartão de Débito");
-        Assertions.assertEquals(78f, ridePayment.calculateValue(), 0);
+        Assertions.assertEquals(78f, ridePayment.getamont(), 0);
     }
 
     @Test
     public void testNocturnalRideWithinRange() {
         RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 20, 0), 5.0f, "Dinheiro");
-        Assertions.assertEquals(18.50f, ridePayment.calculateValue(), 0);
+        Assertions.assertEquals(18.50f, ridePayment.getamont(), 0);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class CabbieManagerTest {
     }
     @Test
     public void testVehicleMarshaller(){
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle = new Vehicle("CabbieId");
         vehicle.registerVehicle();
         Assertions.assertDoesNotThrow(()->{
             JAXBContext context = JAXBContext.newInstance(Vehicle.class);

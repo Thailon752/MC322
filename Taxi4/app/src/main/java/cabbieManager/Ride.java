@@ -14,6 +14,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.xml.bind.annotation.XmlRootElement;
+/**
+ * O objeto ride vai ser usado como um intermediario para registrar que a corrida aconteceu.
+ * Para isso ela dispoe dos atribustos rideId, passengerId,cabbieId,vehicleId,status,pickupLocation
+ * dropLocation,startTime,distance.
+ * Cada atributo tem sua fncionalidade implicita no nome.
+ */
 
 @XmlRootElement
 public class Ride {
@@ -23,43 +29,35 @@ public class Ride {
     private String cabbieId;
     private String vehicleId;
     private String status;
-
-    // Adcionar campos do Trabalho3
     private Location pickupLocation;
     private Location dropLocation;
     private LocalDateTime startTime;
     private float distance;
-
-
-    //Adicionar os métodos da classe Ride
-
+    /**
+     * Construtor da corrida, para existir a corrida so precisa de um passenger.
+     * @param passengerId uma String que é o id do passenger
+     */
 
     public Ride(String passengerId) {
         this.passengerId = passengerId;
     }
-
     /**
-     * Requests a ride by a passenger.
+     * Geters para os atributos de ride
      * 
-     * @param pickupLocation  the location where the passenger wants to be picked up
-     * @param dropLocation    the location where the passenger wants to be dropped off
-     * 
-     * The ride status is set to "REQUESTED".
-     * The startTime is set to the current time.
-     * 
-     * A message is printed to the console with the information of the ride.
+     * @return o atributo selecionado.
      */
+    public float getRideDistance() {
+        return this.distance;
+    }
+    public LocalDateTime getStartTime() {
+        return this.startTime;
+    }
+    public String getRideId() {
+        return this.rideId;
+    }
     public String getCabbieId() {
         return cabbieId;
     }
-    // Método para normalizar o nome da localização (remover acentos e espaços)
-    private String normalizeLocationName(String locationName) {
-        locationName = Normalizer.normalize(locationName, Normalizer.Form.NFD);
-        locationName = locationName.replaceAll("[^\\p{ASCII}]", ""); 
-        return locationName.replaceAll("\\s", "").toUpperCase(); 
-}
-
-
     public String getPassengerId() {
         return passengerId;
     }
@@ -69,6 +67,31 @@ public class Ride {
     public String getStatus() {
         return status;
     }
+    /**
+     * Normaliza a String dada para melhorar ser mais facil ser reconhecida.
+     * Método para normalizar o nome da localização (remover acentos e espaços)
+     * @param locationName String com o nome do metodo para ser normalizado
+     * @return uma String normalizada.
+     */
+    private String normalizeLocationName(String locationName) {
+        locationName = Normalizer.normalize(locationName, Normalizer.Form.NFD);
+        locationName = locationName.replaceAll("[^\\p{ASCII}]", ""); 
+        return locationName.replaceAll("\\s", "").toUpperCase(); 
+}
+
+
+    
+    /**
+     * Solicita uma corrida por um passageiro.
+     * 
+     * @param pickupLocation  o local onde o passageiro deseja ser buscado
+     * @param dropLocation    o local onde o passageiro deseja ser deixado
+     * 
+     * O status da corrida é definido como "SOLICITADA".
+     * O startTime é definido como o horário atual.
+     * 
+     * Uma mensagem é exibida no console com as informações da corrida.
+     */
     public void requestRide(String pickupLocationName, String dropLocationName) {
         this.startTime = LocalDateTime.now();
         this.status = "Solicitada";
@@ -140,16 +163,15 @@ public class Ride {
         " às " + this.startTime.getHour() + ":" + String.format("%02d", this.startTime.getMinute()));
 
     }
-
-
+    
+    
     /**
-     * Calculates the distance between the pickup and drop locations.
+     * Calcula a distância entre os locais de origem e destino.
      * 
-     * The distance is calculated as the Euclidean distance between the two points.
+     * A distância é calculada como a distância euclidiana entre os dois pontos.
      * 
-     * @return the calculated distance.
+     * @return a distância calculada.
      */
-
      public float calculateDistance() {
         float varx, vary, varf;    
         varx = dropLocation.getCoordenadaX() - pickupLocation.getCoordenadaX();
@@ -185,10 +207,18 @@ public class Ride {
             this.vehicleId = vehicleId;
 
         }
-        
-
-
     }
+    /**
+     * Finaliza a corrida e faz as mudanças necessárias.
+     * @param motora objeto do tipo Cabbie. Usado para poder atualizar a nota do taxista
+     * @param fecha boolean usado para saber se é necessário fechar o scanner
+     * 
+     * Finaliza a corrida e pede a nota para o pessenger a nota.
+     * 
+     */
+
+
+
     public void completeRide(Cabbie motora, boolean fecha) {
         this.status = "finalizada";
         float note = -1; 
@@ -213,14 +243,17 @@ public class Ride {
             fecha_scanner(sc);
         }
     }
-
+    /**
+     * funcão para fechar o scanner apenas quando é necessário
+     * @param sc scan a ser fechado.
+     */
     private void fecha_scanner(Scanner sc){
         sc.close();
     }
 
     /**
-     * Sets the pickup location of this ride.
-     * @param pickupLocation The new pickup location.
+     * Seta a localização de embarque
+     * @param pickupLocation String com o nome da localização
      */
     public void setPickupLocation(Location pickupLocation) {
         this.pickupLocation = pickupLocation;
@@ -228,40 +261,13 @@ public class Ride {
 
 
     /**
-     * Sets the drop location of this ride.
-     * @param dropLocation The new drop location.
+     *Seta a localização do desembarque
+     * @param dropLocation enum location, vai ter as coordenadas e o nome.
      */
     public void setDropLocation(Location dropLocation) {
         this.dropLocation = dropLocation;
     }
 
-    /**
-     * Gets the ID of this ride.
-     * 
-     * @return the ID of this ride (a UUID)
-     */
-    public String getRideId() {
-        return this.rideId;
-    }
-
-    /**
-     * Gets the start time of this ride.
-     * 
-     * @return the start time of this ride (a LocalDateTime)
-     */
-    public LocalDateTime getStartTime() {
-        return this.startTime;
-    }
-
-    /**
-     * Gets the distance of this ride.
-     * 
-     * @return the distance of this ride (a float)
-     */
-    public float getRideDistance() {
-        // TODO Auto-generated method stub
-        return this.distance;
-    }
 
 
     

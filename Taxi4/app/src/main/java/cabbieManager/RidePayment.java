@@ -10,8 +10,25 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+/**
+ * Objeto ridepaymente implementa a interface Payment.
+ * Os atributos servem para registro da corrida e para ação de pagamento.
+ * PaymentId atributo para diferenciar de outras corridas
+ * rideId atributo para saber de qual corrida é referente o pagamento.
+ * rideStartTime atributo para calcular o valor a ser pago. Ele contem o dia e horario da corrida
+ * rideDistance atributo para calcular o valor a ser pago. Ele tem a distancia dos pontos
+ * de embarque e desembarque em float.
+ * amount atributo que é o pago pela corrida. Em float.
+ * paymentMethod atributo que contem um enum para dependendo da opção selecionada saber a taxa do pagamento
+ * selecionado.
+ * 
+ */
 
+
+
+
+
+@XmlRootElement
 public class RidePayment implements Payment{
     
     private final String paymentId;
