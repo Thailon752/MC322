@@ -1,7 +1,21 @@
 package cabbieManager;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import utils.CabbieInfoGenerator;
+
+/**
+ * O objeto Cabbie funciona como um motorista no programa.
+ * Ele é uma extensão de Person que tem nome,phone e email
+ * E tem seus atributos próprios como cabbieId,rating,licenseNumber e status.
+ * O cabbieID é para identificar ele de outro Cabbie com mesmo nome.
+ * O ranting é a nota que ele teria no nosso programa, essa nota é dada pelos passengers
+ * O LicenseNumber é a licensa que pode ser validada dentro de um banco de dados, para saber se ele ta apto
+ * a ser motorista(Isso não foi implementado ainda, mas é por isso que o atributo existe).
+ * O status é algo fluido que vai ser atualizado como True quando ele está com passagers e False quando não esta
+ * é mais para dizer sobre a disponibilidade dele para aceitar uma corrida que foi pedida.
+ * A função dele é fazer uma corrida de um ponto a outro.
+ */
 
 @XmlRootElement
 public class Cabbie extends Person{
@@ -9,39 +23,63 @@ public class Cabbie extends Person{
     private float rating;
     private String licenseNumber;
     private boolean status;
-
+    
+    
+    
+     /**
+     * Geters todos os atributos de Cabbie
+     * 
+     * @return o atributo do geter pedido.
+     */
+    @XmlElement
+    public String getCabbieId() {
+        return this.cabbieId;
+    }
+    @XmlElement
     public float getRate() {
         return rating;
     }
-    
-    public void setaval(float avalia){
-        calcularating(avalia);
-    }
-    private void calcularating(float avalia){
-        this.rating=((this.rating+avalia)/2);
-
-    }
-
+    @XmlElement
     public String getCabbieid() {
         return this.cabbieId;
     }
+    @XmlElement
     public boolean getstatus(){
         return this.status;
     }
+    @XmlElement
     public String getLicensenumber(){
        return this.licenseNumber;
     }
-    public void getaval(float avalia){
-        calcularating(avalia);
-    }    
+
+
+    /**
+     * Seta o rating do taxista
+     * @param avalia parametro float que é a nota que ele recebeu pela corrida.
+     * O parametro pode variar de 0-5
+     * chama a função privada caclularanting dando o parametro avalia para ela.
+     */
+    public void setaval(float avalia){
+        this.rating =calcularating(avalia);
+    }
+    /**
+     * Calcula o ranting novo 
+     * @param avalia parametro float que é a nota que ele recebeu pela corrida.
+     * O parametro pode variar de 0-5
+     * A função calcula fazendo uma média simples com o valor do rating antigo e a nota nova.
+     */
+    private float calcularating(float avalia){
+        return ((this.rating+avalia)/2);
+
+    }
     
 
     
     /**
-     * Registers a cabbie by generating random information.
-     * This method assigns a random name, email, phone number, cabbie ID, rate and
-     * license number to the cabbie.
-     * 
+     * Registra um taxista gerando informações aleatórias.
+     * Este método atribui um nome, email, número de telefone, ID do taxista,
+     * tarifa e número da licença aleatórios ao taxista.
+     * E gera um printe de saida mostrando que ele foi gerado
      */
     @Override
     public void register() {
@@ -58,12 +96,12 @@ public class Cabbie extends Person{
     }
 
     /**
-     * Updates a field of the cabbie.
+     * Atualiza um campo do taxista.
      * 
-     * @param field The field to be updated.
-     * @param newValue The new value for the field.
+     * @param field O campo a ser atualizado.
+     * @param newValue O novo valor para o campo.
      * 
-     * The valid fields are:
+     * Os campos válidos são:
      * <ul>
      * <li>name</li>
      * <li>email</li>
@@ -73,7 +111,7 @@ public class Cabbie extends Person{
      * <li>licenseNumber</li>
      * </ul>
      * 
-     * If the field is not valid, a message is printed and the field is not updated.
+     * Se o campo não for válido, uma mensagem é exibida e o campo não é atualizado.
      */
     @Override
     public void update(String field, String newValue){
@@ -112,25 +150,19 @@ public class Cabbie extends Person{
     }
     
     
-    /**
-     * Gets the ID of the cabbie.
-     * 
-     * @return the ID of the cabbie (a UUID)
-     */
-    public String getCabbieId() {
-        return this.cabbieId;
-    }
+   
 
     /**
-     * Returns a string representation of the object.
+     * Retorna uma representação em string do objeto.
      * 
-     * The format is: "email name phone cabbieId rate licenseNumber"
+     * O formato é: "nome identidade numero de licensa nota telefone e email"
      * 
-     * @return a string representation of the object
+     * @return uma representação em string do objeto
      */
     @Override
     public String toString() {
-        return String.format(this.email, this.name, this.phone, this.cabbieId, this.rating, this.licenseNumber);
+        return String.format(this.name,this.cabbieId,this.licenseNumber,this.rating,this.phone,this.email);
+                
     }
 
 

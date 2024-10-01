@@ -3,6 +3,7 @@ import com.google.common.base.Objects;
 
 import utils.VehicleInfoGenerator;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import utils.VehicleInfoGenerator;
@@ -15,15 +16,46 @@ public class Vehicle {
     private int year;
     private String cabbieId;
     
+    /**
+     * Pega os atributos de veiculo
+     * 
+     * Abaixo tem um geter para cada atributo que esse objeto tem.
+     * 
+     * @return os atributos
+     */
+    @XmlElement
+    public String getVehicleId() {
+        return this.vehicleId;
+    }
+    @XmlElement
+    public String getregistration(){
+        return this.registrationNumber;
+    }
+    @XmlElement
+    public String getmodel(){
+        return this.model;
+    }
+    @XmlElement
+    public int getano(){
+        return this.year;
+    }
+    @XmlElement
+    public String getVcabID(){
+        return this.cabbieId;
+    }
 
-
+    /**
+     * Construtor do veiculo 
+     * @param cabbieId identificação do dono do carro
+     * Apenas seta o dono.
+     */
     public Vehicle(String cabbieId) {
         this.cabbieId = cabbieId;
     }
 
     /**
-     * Registers a vehicle by generating random information.
-     * This method assigns a random ID, registration number, model and year to the vehicle.
+     * Registra o veiculo com informações randomizadas fornecidas pelo Vehicleinforgenerator.
+     * Esse método seta o id do veiculo, o numero de registro, modelo e ano.
      */
     public void registerVehicle() {
         VehicleInfoGenerator veh = new VehicleInfoGenerator();
@@ -36,12 +68,12 @@ public class Vehicle {
     }
 
     /**
-     * Updates a field of the Vehicle.
+     * Atualiza os atributos do veiculo
      * 
-     * @param field The field to be updated.
-     * @param newValue The new value for the field.
+     * @param field campo a ser atualizado
+     * @param newValue novo falor do campo selecionado
      * 
-     * The valid fields are:
+     * Campos validos são:
      * <ul>
      * <li>vehicleId</li>
      * <li>registrationNumber</li>
@@ -49,7 +81,7 @@ public class Vehicle {
      * <li>year</li>
      * </ul>
      * 
-     * If the field is not valid, a message is printed and the field is not updated.
+     * Se o campo selecionado não é válido é printado uma mensagem de campo invalido
      */
     public void updateVehicle(String field, String newValue) {
 
@@ -83,22 +115,15 @@ public class Vehicle {
     }
 
     /**
-     * Returns a string representation of the Vehicle.
+     * Retorna uma string de apresentação do objeto
      * 
-     * @return a string containing the ID, registration number, model, year and
-     *         cabbie ID of the vehicle, separated by commas.
+     * @return a string tem id do veiculo, numero de registro, modelo, ano e
+     *         o id do taxista dono dele, separados por virgula.
      */
 
     public String toString() {
         return String.format(this.vehicleId, this.registrationNumber, this.model, this.year, this.cabbieId);
     }
 
-    /**
-     * Gets the ID of the Vehicle.
-     * 
-     * @return the ID of the vehicle (a UUID)
-     */
-    public String getVehicleId() {
-        return this.vehicleId;
-    }
+    
 }

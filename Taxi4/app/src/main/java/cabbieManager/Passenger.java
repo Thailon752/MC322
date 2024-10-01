@@ -1,18 +1,26 @@
 package cabbieManager;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 import utils.PassengerInfoGenerator;
+/**
+ * O objeto passenger funciona como passageiro no nosso programa.
+ * Ele é uma extensão de person que contem name,phone e email.
+ * E também tem seu atributo próprio que é o passengerId que é usado para diferenciar de outros
+ * passenger com possiveis nomes,email e telefones iguais. Teoricamente são unicos no programa.
+ * No programa o passenger requesita corrida para onde ele deseja ir.
+ */
+
 
 @XmlRootElement
 public class Passenger extends Person{
     private String passengerId;
 
     /**
-     * Registers a passenger by generating random information.
-     * This method assigns a random email, name, phone number, and user ID to the passenger.
+     * Registra um Passenger dando atributos aleatórios gerados pelo PassengerInforGernerator
+     * Esse metodo seta randomicament o email, name, phone number e ID do passenger.
      * 
      */
     @Override
@@ -26,14 +34,13 @@ public class Passenger extends Person{
         System.out.println("Pessoa passageira " + this.passengerId + " (" + this.name + ") criada com sucesso");
     
     }
-
     /**
-     * Updates a field of the passenger.
+     * Atualiza um campo do passageiro.
      * 
-     * @param field The field to be updated.
-     * @param newValue The new value for the field.
+     * @param field O campo a ser atualizado.
+     * @param newValue O novo valor para o campo.
      * 
-     * The valid fields are:
+     * Os campos válidos são:
      * <ul>
      * <li>name</li>
      * <li>email</li>
@@ -41,7 +48,7 @@ public class Passenger extends Person{
      * <li>passengerId</li>
      * </ul>
      * 
-     * If the field is not valid, a message is printed and the field is not updated.
+     * Se o campo não for válido, uma mensagem é exibida e o campo não é atualizado.
      */
     @Override
     public void update(String field, String newValue){
@@ -74,24 +81,25 @@ public class Passenger extends Person{
     }
 
     /**
-     * Gets the ID of the passenger.
+     * Geter do Id do passageiro.
      * 
-     * @return the ID of the passenger (a UUID)
+     * @return o id do passageiro e ele está no formato UUID
      */
+    @XmlElement
     public String getPassengerId() {
         return this.passengerId;
     }
 
 
     /**
-     * Returns a string representation of the object.
+     * Retorna uma representação do objeto em formato de string
      * 
-     * The format is: "email name phone passengerId"
+     * O formato é: "nome, id do passageiro, telefone e email"
      * 
-     * @return a string representation of the object
+     * @return String que representa o objeto
      */
     @Override
     public String toString() {
-        return String.format(this.email, this.name, this.phone, this.passengerId);
+        return String.format(this.name, this.passengerId,this.phone,this.email);
     }
 }

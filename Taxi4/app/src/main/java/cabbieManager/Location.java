@@ -1,12 +1,15 @@
 package cabbieManager;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-
+/**
+     * Uma tabela de localizações com coordenadas X e Y
+     * 
+     * Ela sera usada para calcular a distancias entre os destinos.
+     * 
+     */
 public enum Location {
     
     // IMPLEMENTAÇÃO ENUM LOCATION
-
+    
     AEROPORTO("Aeroporto", 5, 18),
     ESTAÇÃODETREM("Estação de Trem", 12, 8),
     SHOPPING("Shopping", 20, 7),
@@ -26,15 +29,17 @@ public enum Location {
         this.coordenadaY = y;
 
     }
-
+    /**
+     * Geters dos atributos de cada localização
+     * @return retorna o atributo da localização que foi chamado.
+     * Pode retornar nome,coordenadaX e coordenadaY.
+     */
     public String getNome() {
         return nome;
     }
-
     public int getCoordenadaX() {
         return coordenadaX;
     }
-
     public int getCoordenadaY() {
         return coordenadaY;
     }

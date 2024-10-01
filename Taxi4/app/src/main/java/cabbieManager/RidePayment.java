@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import utils.LocalDateTimeAdapter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,7 +50,7 @@ public class RidePayment implements Payment{
     /**
      * Recebe um texto e tira os espaços e coloca em UPERCASE
      * 
-     * @param texto o texto a ser normalizado
+     * @param texto o texto a ser normalizado do tipo String
      * 
      * @return retorna uma string em maiusculo do texto sem espaços
      */
@@ -65,7 +64,8 @@ public class RidePayment implements Payment{
      * Com base na hora do dia, retorna se é Dia ou noite.
      * 
      * Usa a Localdatetime para saber a hora
-     * @param rideStartTime
+     * @param horario do tipo LocalDate time
+     * Usa apenas o getHour do LocalDateTime para saber o periodo
      * 
      * @return uma string com o periodo do dia
      */
@@ -84,8 +84,9 @@ public class RidePayment implements Payment{
      * 
      * Usando uma tabela para fazer as contas dependendo da distancia recebida pelo construtor
      * Utiliza a função noite_dia para saber o em qual periodo a corrida foi chamada
+     * Com base nessas informações retorna o valor pela distancia percorrida
      * 
-     * @return o valor da corrida.
+     * @return retorna um float que representa o valor pela distania da corrida
      */
     
     private float valor_da_corrida() {
@@ -141,7 +142,9 @@ public class RidePayment implements Payment{
      * 
      * Usa o enum PaymentOption para saber a taxa do metodo dado no construtor.
      * 
-     * E seta a quantidade a pagar pela corrida no objeto
+     * E seta a quantidade a pagar pela corrida.
+     * 
+     * O valor setado sera um float com duas casas.
      */
     private void calcula_value(){
         float taxa =(float) this.paymentMethod.gettaxa()/100;
@@ -174,12 +177,11 @@ public class RidePayment implements Payment{
 
     /**
      * Processa o pagamento da corrida.
-     * @param Pagamentos Array que registra os pagamentos feitos
-     * Guardando o objeto dentro de um Array fornecido e printando um sinal de pagamaento realizado
+     * 
+     * 
     */
     @Override
-    public void processPayment(ArrayList<RidePayment> Pagamentos) {
-        Pagamentos.add(this);
+    public void processPayment() {
         System.out.println("Pagamento realizado com sucesso!");
     }
 

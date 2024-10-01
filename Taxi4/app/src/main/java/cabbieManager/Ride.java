@@ -207,7 +207,7 @@ public class Ride {
                 sc.next();  // Limpar a entrada inválida
             }
         }
-        motora.getaval(note);  // Passa a nota para o motorista
+        motora.setaval(note);  // Passa a nota para o motorista
         System.out.println("Corrida finalizada");
         if(fecha){
             fecha_scanner(sc);

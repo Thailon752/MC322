@@ -1,5 +1,7 @@
 package cabbieManager;
 
+import org.checkerframework.checker.units.qual.t;
+
 import databaseManager.Database;
 
 public class Main {
@@ -56,7 +58,7 @@ public class Main {
         db.insert(payment);
 
         //Finish Ride
-        ride.completeRide();
+        ride.completeRide(cab,false);
         cab.update("isBusy", "false");
 
         db.update(ride);
@@ -85,7 +87,7 @@ public class Main {
         db.insert(payment2);
 
         //Finish Ride
-        ride.completeRide();
+        ride.completeRide(cab,true);
         cab.update("isBusy", "false");
 
         db.update(ride);

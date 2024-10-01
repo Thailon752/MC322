@@ -11,8 +11,9 @@
 <!ELEMENT email (#PCDATA)>
 <!ELEMENT passengerId (#PCDATA)>
 <!ELEMENT phone (#PCDATA)>
-<!ELEMENT paymentMethods (paymentMethod+)>
-<!ELEMENT paymentMethod (#PCDATA|amount|paymentId|paymentMethod|rideDistance|rideStartTime)*>
+<!ELEMENT RidePayment (RidePayment+)>
+<!ELEMENT RidePayment (rideId|amount|paymentId|paymentMethod|rideDistance|rideStartTime)*>
+<!ELEMENT rideId (#PCDATA)>
 <!ELEMENT amount (#PCDATA)>
 <!ELEMENT paymentId (#PCDATA)>
 <!ELEMENT rideDistance (#PCDATA)>
