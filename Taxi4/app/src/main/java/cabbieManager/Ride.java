@@ -8,8 +8,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.google.common.base.Objects;
 
 import utils.LocalDateTimeAdapter;
+import java.text.Normalizer;
+import java.time.LocalDateTime;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Ride {
     
     private String rideId;
@@ -26,9 +32,7 @@ public class Ride {
 
 
     //Adicionar os métodos da classe Ride
-    public Ride(){
 
-    }
 
     public Ride(String passengerId) {
         this.passengerId = passengerId;
@@ -45,33 +49,95 @@ public class Ride {
      * 
      * A message is printed to the console with the information of the ride.
      */
-
-    public void requestRide(String pickupLocation, String dropLocation) {
-
-        this.rideId = UUID.randomUUID().toString();
-        this.pickupLocation = this.returnLocation(pickupLocation);
-        this.dropLocation= this.returnLocation(dropLocation);
-        this.startTime = LocalDateTime.now();
-
-        System.out.println("Corrida chamada por pessoa passageira " + this.passengerId + " de " + pickupLocation + " para " + dropLocation);
-        this.updateRideStatus("CHAMADA", null, null);
-
-        this.distance = this.calculateDistance();
-
+    public String getCabbieId() {
+        return cabbieId;
     }
+    // Método para normalizar o nome da localização (remover acentos e espaços)
+    private String normalizeLocationName(String locationName) {
+        locationName = Normalizer.normalize(locationName, Normalizer.Form.NFD);
+        locationName = locationName.replaceAll("[^\\p{ASCII}]", ""); 
+        return locationName.replaceAll("\\s", "").toUpperCase(); 
+}
 
 
-    /**
-     * Returns a Location given a location name.
-     * 
-     * @param locationName  the name of the location
-     * 
-     * If the location is not found, a default value of AEROPORTO is returned.
-     * 
-     * @return a Location object
-     */
-    private Location returnLocation(String locationName) {
-        return Location.valueOfName(locationName);
+    public String getPassengerId() {
+        return passengerId;
+    }
+    public String getVehicleId() {
+        return vehicleId;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void requestRide(String pickupLocationName, String dropLocationName) {
+        this.startTime = LocalDateTime.now();
+        this.status = "Solicitada";
+        pickupLocationName = normalizeLocationName(pickupLocationName);
+        dropLocationName = normalizeLocationName(dropLocationName);
+        switch (pickupLocationName.toUpperCase()) {
+            case "AEROPORTO":
+                this.pickupLocation = Location.AEROPORTO;
+                break;
+            case "ESTACAODETREM":
+                this.pickupLocation = Location.ESTAÇÃODETREM;
+                break;
+            case "SHOPPING":
+                this.pickupLocation = Location.SHOPPING;
+                break;
+            case "ESCOLA":
+                this.pickupLocation = Location.ESCOLA;
+                break;
+            case "PARQUE":
+                this.pickupLocation = Location.PARQUE;
+                break;
+            case "HOSPITAL":
+                this.pickupLocation = Location.HOSPITAL;
+                break;
+            case "BIBLIOTECA":
+                this.pickupLocation = Location.BIBLIOTECA;
+                break;
+            case "ESTADIO":
+                this.pickupLocation = Location.ESTADIO;
+                break;
+            default:
+                System.out.println("Localização de pickup não encontrada.");
+                return;
+        }
+
+        switch (dropLocationName.toUpperCase()) {
+            case "AEROPORTO":
+                this.dropLocation = Location.AEROPORTO;
+                break;
+            case "ESTACAODETREM":
+                this.dropLocation = Location.ESTAÇÃODETREM;
+                break;
+            case "SHOPPING":
+                this.dropLocation = Location.SHOPPING;
+                break;
+            case "ESCOLA":
+                this.dropLocation = Location.ESCOLA;
+                break;
+            case "PARQUE":
+                this.dropLocation = Location.PARQUE;
+                break;
+            case "HOSPITAL":
+                this.dropLocation = Location.HOSPITAL;
+                break;
+            case "BIBLIOTECA":
+                this.dropLocation = Location.BIBLIOTECA;
+                break;
+            case "ESTADIO":
+                this.dropLocation = Location.ESTADIO;
+                break;
+            default:
+                System.out.println("Localização de drop não encontrada.");
+                return;
+        }
+        calculateDistance();
+        System.out.println("Status: " + this.status);
+        System.out.println("Corrida solicitada de " + this.pickupLocation.getNome() +
+        " para " + this.dropLocation.getNome() + " (" + String.format("%02f", this.distance)+ "km)" +
+        " às " + this.startTime.getHour() + ":" + String.format("%02d", this.startTime.getMinute()));
 
     }
 
@@ -83,19 +149,19 @@ public class Ride {
      * 
      * @return the calculated distance.
      */
-    public float calculateDistance() {
-        
-        int x_pickup = pickupLocation.getX();
-        int y_pickup = pickupLocation.getY();
 
-        int x_drop = dropLocation.getX();
-        int y_drop = dropLocation.getY();
+     public float calculateDistance() {
+        float varx, vary, varf;    
+        varx = dropLocation.getCoordenadaX() - pickupLocation.getCoordenadaX();
+        vary = dropLocation.getCoordenadaY() - pickupLocation.getCoordenadaY();
+        varf = (float) Math.sqrt(Math.pow(varx, 2) + Math.pow(vary, 2));
+        float distanceTruncated = (float) ((int) (varf * 100)) / 100;
 
-        float distance = (float) Math.sqrt(Math.pow(x_drop - x_pickup, 2) + Math.pow(y_drop - y_pickup, 2));
-        distance = Math.round(distance * 100) / 100.0f;
-        System.out.println(("Distância calculada: " + distance));
-        return distance;
+        this.distance = distanceTruncated;
+        return distanceTruncated;
     }
+    
+    
 
 
     /**
@@ -111,26 +177,47 @@ public class Ride {
      *                  "ACCEPTED"
      */
     public void updateRideStatus(String status, String cabbieId, String vehicleId) {
-        this.status = status;
-
-        if (status.equals("ACEITA")) {
+        
+        // IMPLEMENTAR METODO UPDATE RIDE STATUS
+        if (status.equalsIgnoreCase("ACEITA")){
+            this.status =  "em corrida";
             this.cabbieId = cabbieId;
             this.vehicleId = vehicleId;
-            System.out.println(("Corrida aceita por pessoa motorista " + this.cabbieId));
-        } else {
-            System.out.println("Status da corrida: " + this.status);
+
         }
+        
+
 
     }
+    public void completeRide(Cabbie motora, boolean fecha) {
+        this.status = "finalizada";
+        float note = -1; 
+        Scanner sc = new Scanner(System.in);  
+        System.err.println("Corrida finalizada.");
 
-    public void completeRide() {
+        while (note < 0 || note > 5) {
+            try {
+                System.out.print("Digite a nota do motorista indo de 0 a 5: ");
+                note = sc.nextFloat();
+                if (note < 0 || note > 5) {
+                    System.out.println("Por favor, insira uma nota válida entre 0 e 5.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, insira um número entre 0 e 5.");
+                sc.next();  // Limpar a entrada inválida
+            }
+        }
+        motora.getaval(note);  // Passa a nota para o motorista
         System.out.println("Corrida finalizada");
-
+        if(fecha){
+            fecha_scanner(sc);
+        }
     }
 
-    public Location getPickLocation(){
-        return this.pickupLocation;
+    private void fecha_scanner(Scanner sc){
+        sc.close();
     }
+
     /**
      * Sets the pickup location of this ride.
      * @param pickupLocation The new pickup location.
@@ -139,9 +226,7 @@ public class Ride {
         this.pickupLocation = pickupLocation;
     }
 
-    public Location getDropLocation(){
-        return this.dropLocation;
-    }
+
     /**
      * Sets the drop location of this ride.
      * @param dropLocation The new drop location.
@@ -159,17 +244,11 @@ public class Ride {
         return this.rideId;
     }
 
-    public void setRideId(String rideId){
-        this.rideId = rideId;
-    }
-
     /**
      * Gets the start time of this ride.
      * 
      * @return the start time of this ride (a LocalDateTime)
      */
-    @XmlJavaTypeAdapter(value = LocalDateTimeAdapter.class)
-    
     public LocalDateTime getStartTime() {
         return this.startTime;
     }
@@ -184,59 +263,6 @@ public class Ride {
         return this.distance;
     }
 
-    public String getPassengerId() {
-        return passengerId;
-    }
 
-    public void setPassengerId(String passengerId) {
-        this.passengerId = passengerId;
-    }
-
-    public String getCabbieId() {
-        return cabbieId;
-    }
-
-    public void setCabbieId(String cabbieId) {
-        this.cabbieId = cabbieId;
-    }
-
-    public String getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public float getDistance() {
-        return distance;
-    }
     
-    public void setDistance(float distance) {
-        this.distance = distance;
-    }
-
-
-    @Override
-    public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        
-        Ride pas = (Ride) o;
-        return Objects.equal(this.rideId, pas.getRideId());
-    }
-    
-    @Override
-    public String toString() {
-        return "Ride: " + this.rideId;
-    }
 }

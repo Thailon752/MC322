@@ -6,140 +6,182 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import utils.LocalDateTimeAdapter;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.UUID;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 
 public class RidePayment implements Payment{
     
-    private String paymentId;
-    private String rideId;
-    private LocalDateTime rideStartTime;
-    private float rideDistance;
+    private final String paymentId;
+    private final String rideId;
+    private final LocalDateTime rideStartTime;
+    private final float rideDistance;
     private float amount;
-    private PaymentOption paymentMethod;
+    private final PaymentOption paymentMethod;
 
-    public RidePayment(){
-        
-    }
 
-    public RidePayment(String rideId, LocalDateTime rideStartTime, float rideDistance ,String paymentMethod) {
+       
+    // IMPLEMENTAR CONSTRUTUOR DA CLASS
+    /**
+     * O construtor recebe o id corrida a data e hora, a distancia e o metodo de pagamento.
+     * @param corridaid id da corrida a ser paga.
+     * @param datahora horario da corrida para calcular o valor
+     * @param distancia a distancia entre os pontos de inicio e fim da corrida
+     * @param metodopag metodo de pagamento definido.
+     * Usa os parametros para inicializar o objeto e calcular o valor a ser pago.
+     * Dentro do construtor já é definido também o id do objeto pela biblioteca UUID.
+     * Gera algumas saidas para melhor comunicação como a forma do pagamento e o valor a ser pago.
+     */
+    
 
+    public RidePayment(String corridId,LocalDateTime datahora, float distancia,String metodopag){
+        this.rideId =  corridId;
+        this.rideStartTime = datahora;
+        this.rideDistance = distancia;
+        this.paymentMethod = PaymentOption.valueOf(normalizar(metodopag));
+        System.out.printf("Forma de pagamento selecionada: %s\n", this.paymentMethod.getnome());
         this.paymentId = UUID.randomUUID().toString();
-        this.rideId = rideId;
-        this.rideStartTime = rideStartTime;
-        this.rideDistance = rideDistance;
-        this.paymentMethod = this.selectPaymentMethod(paymentMethod);
-        System.out.println("Forma de pagamento selecionada: " + paymentMethod);
-        this.amount = this.calculateValue();
-
-    }
-
-
-    /**
-     * Selects a PaymentOption from a given string.
-     * @param paymentMethod the name of the payment method
-     * @return the selected PaymentOption
-     * @throws IllegalArgumentException if paymentMethod is not a valid PaymentOption
-     */
-    private PaymentOption selectPaymentMethod(String paymentMethod) {
-        return PaymentOption.valueOfName(paymentMethod);
+        calcula_value();
+        System.out.printf("Valor da corrida: %.2f\n", this.amount);
     }
 
     /**
-     * Calculates the value of the ride.
+     * Recebe um texto e tira os espaços e coloca em UPERCASE
      * 
-     * The value is calculated using the price table
+     * @param texto o texto a ser normalizado
      * 
-     * @return the calculated value of the ride.
+     * @return retorna uma string em maiusculo do texto sem espaços
      */
-    public float calculateValue() {
 
-        final float[] PRECO_INICIAL_DIURNO = {5.00f, 4.00f, 3.50f, 3.00f, 2.50f};
-        final float[] PRECO_POR_KM_DIURNO = {2.00f, 2.50f, 3.00f, 4.00f, 3.50f};
-        final float[] PRECO_INICIAL_NOTURNO = {6.00f, 5.00f, 4.50f, 4.00f, 3.50f};
-        final float[] PRECO_POR_KM_NOTURNO = {2.50f, 3.00f, 3.50f, 4.50f, 4.0f};
-        final float DISTANCIAS_LIMITE[] = {5, 10, 15, 20, 25};
-
-
-        // identifies the distance range
-        int faixa = -1;
-
-        for (int i = 0; i < DISTANCIAS_LIMITE.length; i++) {
-            if (this.rideDistance <= DISTANCIAS_LIMITE[i]) {
-                faixa = i;
-                break;
-            }
-        }
-
-
-        // stabilish the initial and per km price
-        float precoInicial = isHorarioNoturno() ? PRECO_INICIAL_NOTURNO[faixa] : PRECO_INICIAL_DIURNO[faixa];
-        float precoPorKm = isHorarioNoturno() ? PRECO_POR_KM_NOTURNO[faixa] : PRECO_POR_KM_DIURNO[faixa];
-
-        // calculates the total amount considering the payment method fee
-        float _amount = this.paymentMethod.calculatePaymentFee(precoInicial + (this.rideDistance * precoPorKm));
-        this.amount = Math.round(_amount * 100) / 100.0f;
-
-        return this.amount;
+    private String normalizar(String texto) {
+        return texto.trim().replaceAll("\\s+", "").toUpperCase();
     }
-
-    private boolean isHorarioNoturno() {
-        return this.rideStartTime.toLocalTime().isBefore(LocalTime.of(6, 0)) || this.rideStartTime.toLocalTime().isAfter(LocalTime.of(18, 0));
-    }
-
+    
     
     /**
+     * Com base na hora do dia, retorna se é Dia ou noite.
+     * 
+     * Usa a Localdatetime para saber a hora
+     * @param rideStartTime
+     * 
+     * @return uma string com o periodo do dia
+     */
+
+    private String noite_dia(LocalDateTime horario){
+        if(this.rideStartTime.getHour()<=18 && this.rideStartTime.getHour()>=5){
+            return "Diurno";
+        }
+        else{
+            return "Noturno";
+        }
+    }
+
+    /**
+     * Calcula o valor da corrida
+     * 
+     * Usando uma tabela para fazer as contas dependendo da distancia recebida pelo construtor
+     * Utiliza a função noite_dia para saber o em qual periodo a corrida foi chamada
+     * 
+     * @return o valor da corrida.
+     */
+    
+    private float valor_da_corrida() {
+        float valor =0;
+        if(this.rideDistance <=5){
+            if(noite_dia(this.rideStartTime).equalsIgnoreCase("Diurno")){
+                valor =(float) (5 + 2*this.rideDistance);
+            }
+            else{
+                valor = (float)(6 + 2.5*this.rideDistance);
+            }
+        }
+        else if(this.rideDistance<=10){
+            if(noite_dia(this.rideStartTime).equalsIgnoreCase("Diurno")){
+                valor =(float) (4 + 2.5*this.rideDistance);
+            }
+            else{
+                valor = (float)(5 + 3*this.rideDistance);
+            }
+        }
+        else if(this.rideDistance<=15){
+            if(noite_dia(this.rideStartTime).equalsIgnoreCase("Diurno")){
+                valor =(float) (3.5 + 3*this.rideDistance);
+            }
+            else{
+                valor = (float)(4.5 + 3.5*this.rideDistance);
+            }
+        }
+        else if(this.rideDistance<=20){
+            if(noite_dia(this.rideStartTime).equalsIgnoreCase("Diurno")){
+                valor =(float) (3 + 4*this.rideDistance);
+            }
+            else{
+                valor = (float)(4 + 4.5*this.rideDistance);
+            }
+        }
+        else if(this.rideDistance>20){
+            if(noite_dia(this.rideStartTime).equalsIgnoreCase("Diurno")){
+                valor =(float) (2.5 + 3.5*this.rideDistance);
+            }
+            else{
+                valor = (float)(3.5 + 4*this.rideDistance);
+            }
+        }
+        return valor;
+    }
+    
+    /**
+     * Calcula o total a ser pago
+     * 
+     * Usa a função valor_da_corrida para saber o valor por distancia e 
+     * acrescenta a taxa dependendo do tipo de pagamento.
+     * 
+     * Usa o enum PaymentOption para saber a taxa do metodo dado no construtor.
+     * 
+     * E seta a quantidade a pagar pela corrida no objeto
+     */
+    private void calcula_value(){
+        float taxa =(float) this.paymentMethod.gettaxa()/100;
+        this.amount = Math.round((valor_da_corrida()+taxa*valor_da_corrida())* 100.0f) / 100.0f;
+
+    }
+    /**
+     * Geters de todos os atributos
+     * @return os atributos que são chamados.
+     */
+    
+    public float getamont(){
+        return this.amount;
+    }
+    public float getridedistance(){
+        return this.rideDistance;
+    }
+    public PaymentOption getoption(){
+        return this.paymentMethod;
+    }
+    public String getpayid(){
+        return this.paymentId;
+    }
+    public  String getrideid(){
+        return this.rideId;
+    }
+    public LocalDateTime getSTime(){
+        return this.rideStartTime;
+    }
+
+    /**
      * Processa o pagamento da corrida.
+     * @param Pagamentos Array que registra os pagamentos feitos
+     * Guardando o objeto dentro de um Array fornecido e printando um sinal de pagamaento realizado
     */
-    public void processPayment() {
-        System.out.println("Valor da corrida definido: " + this.amount);
+    @Override
+    public void processPayment(ArrayList<RidePayment> Pagamentos) {
+        Pagamentos.add(this);
+        System.out.println("Pagamento realizado com sucesso!");
     }
 
-    public String getPaymentId() {
-        return paymentId;
-    }
 
-    public void setPaymentId(String paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public String getRideId() {
-        return rideId;
-    }
-
-    public void setRideId(String rideId) {
-        this.rideId = rideId;
-    }
-
-    @XmlJavaTypeAdapter(value = LocalDateTimeAdapter.class)
-    public LocalDateTime getRideStartTime() {
-        return rideStartTime;
-    }
-
-    public void setRideStartTime(LocalDateTime rideStartTime) {
-        this.rideStartTime = rideStartTime;
-    }
-
-    public float getRideDistance() {
-        return rideDistance;
-    }
-
-    public void setRideDistance(float rideDistance) {
-        this.rideDistance = rideDistance;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
-
-    public PaymentOption getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentOption paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
 }

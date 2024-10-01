@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import utils.PassengerInfoGenerator;
 
 @XmlRootElement
-@XmlSeeAlso({ArrayList.class})
 public class Passenger extends Person{
     private String passengerId;
 

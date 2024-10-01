@@ -3,16 +3,19 @@ import com.google.common.base.Objects;
 
 import utils.VehicleInfoGenerator;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import utils.VehicleInfoGenerator;
+
+@XmlRootElement
 public class Vehicle {
     private String vehicleId;
     private String registrationNumber;
     private String model;
     private int year;
     private String cabbieId;
+    
 
-    public Vehicle(){
-        
-    }
 
     public Vehicle(String cabbieId) {
         this.cabbieId = cabbieId;
@@ -80,48 +83,6 @@ public class Vehicle {
     }
 
     /**
-     * Gets the ID of the Vehicle.
-     * 
-     * @return the ID of the vehicle (a UUID)
-     */
-    public String getVehicleId() {
-        return this.vehicleId;
-    }
-
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-    public String getCabbieId() {
-        return cabbieId;
-    }
-
-    public void setCabbieId(String cabbieId) {
-        this.cabbieId = cabbieId;
-    }
-
-    /**
      * Returns a string representation of the Vehicle.
      * 
      * @return a string containing the ID, registration number, model, year and
@@ -129,16 +90,15 @@ public class Vehicle {
      */
 
     public String toString() {
-        return this.vehicleId + " " + this.model + " " + this.year;
+        return String.format(this.vehicleId, this.registrationNumber, this.model, this.year, this.cabbieId);
     }
 
-    @Override
-    public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        
-        Vehicle pas = (Vehicle) o;
-        return Objects.equal(this.vehicleId, pas.getVehicleId());
+    /**
+     * Gets the ID of the Vehicle.
+     * 
+     * @return the ID of the vehicle (a UUID)
+     */
+    public String getVehicleId() {
+        return this.vehicleId;
     }
 }

@@ -1,60 +1,46 @@
 package cabbieManager;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 
 public enum Location {
     
-    AEROPORTO(5, 18, "Aeroporto"),
-    ESTACAO_DE_TREM(12, 15, "Estação de Trem"),
-    SHOPPING(20, 7, "Shopping"),
-    ESCOLA(6, 23, "Escola"),
-    PARQUE(0, 4, "Parque"),
-    HOSPITAL(15, 12, "Hospital"),
-    BIBLIOTECA(3, 19, "Biblioteca"),
-    ESTADIO(22, 25, "Estadio");
+    // IMPLEMENTAÇÃO ENUM LOCATION
 
-    private final int x;
-    private final int y;
-    private final String name;
+    AEROPORTO("Aeroporto", 5, 18),
+    ESTAÇÃODETREM("Estação de Trem", 12, 8),
+    SHOPPING("Shopping", 20, 7),
+    ESCOLA("Escola", 6, 23),
+    PARQUE("Parque", 0, 4),
+    HOSPITAL("Hospital", 15, 11),
+    BIBLIOTECA("Biblioteca", 3, 19),
+    ESTADIO("Estádio", 22, 25);
 
-    Location(int x, int y, String name) {
-        this.x = x;
-        this.y = y;
-        this.name = name;
+    private final String nome;
+    private final int coordenadaX;
+    private final int coordenadaY;
+
+    Location(String nome,int x, int y){
+        this.nome =  nome;
+        this.coordenadaX = x;
+        this.coordenadaY = y;
+
     }
 
-    public static Location valueOfName(String name) {
-        for (Location location : Location.values()) {
-            if (location.name.equals(name)) {
-                return location;
-            }
-        }
-        return null;
+    public String getNome() {
+        return nome;
     }
 
+    public int getCoordenadaX() {
+        return coordenadaX;
+    }
 
-    /**
-     * Returns the x-coordinate of the location.
-     * @return the x-coordinate of the location
-     */
-    public int getX() {
-        return this.x;
+    public int getCoordenadaY() {
+        return coordenadaY;
     }
 
 
-    /**
-     * Returns the y-coordinate of the location.
-     * @return the y-coordinate of the location
-     */
-    public int getY() {
-        return this.y;
-    }
-
-    /**
-     * Returns the name of the location.
-     * @return the name of the location
-     */
-    public String getName() {
-        return this.name;
-    }
 
 
+    
 }

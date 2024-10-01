@@ -1,19 +1,40 @@
-
 package cabbieManager;
-
-import com.google.common.base.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import utils.CabbieInfoGenerator;
 
+@XmlRootElement
 public class Cabbie extends Person{
     private String cabbieId;
-    private float rate;
+    private float rating;
     private String licenseNumber;
-    private boolean isBusy;
-    private String name;
+    private boolean status;
 
-    public Cabbie() {
+    public float getRate() {
+        return rating;
     }
+    
+    public void setaval(float avalia){
+        calcularating(avalia);
+    }
+    private void calcularating(float avalia){
+        this.rating=((this.rating+avalia)/2);
+
+    }
+
+    public String getCabbieid() {
+        return this.cabbieId;
+    }
+    public boolean getstatus(){
+        return this.status;
+    }
+    public String getLicensenumber(){
+       return this.licenseNumber;
+    }
+    public void getaval(float avalia){
+        calcularating(avalia);
+    }    
+    
 
     
     /**
@@ -30,9 +51,8 @@ public class Cabbie extends Person{
         this.email = cab.getEmail();
         this.phone = cab.getPhone();
         this.cabbieId = cab.getCabbieId();
-        this.rate = cab.getRate();
+        this.rating = cab.getRate();
         this.licenseNumber = cab.getLicenseNumber();
-        this.isBusy = false;
         System.out.println("Pessoa motorista " + this.cabbieId + " (" + this.name + ") criada com sucesso");
     
     }
@@ -74,13 +94,10 @@ public class Cabbie extends Person{
                 this.cabbieId = newValue;
                 break;
             case "rate":
-                this.rate = Float.parseFloat(newValue);
+                this.rating = Float.parseFloat(newValue);
                 break;
             case "licenseNumber":
                 this.licenseNumber = newValue;
-                break;
-            case "isBusy":
-                this.isBusy = Boolean.parseBoolean(newValue);
                 break;
             default:
                 validField = false;
@@ -92,7 +109,6 @@ public class Cabbie extends Person{
             System.out.println("Campo " + field + " foi atualizado com sucesso!");
         }
 
-        return;
     }
     
     
@@ -104,44 +120,6 @@ public class Cabbie extends Person{
     public String getCabbieId() {
         return this.cabbieId;
     }
-    
-    public void setCabbieId(String cabbieId) {
-        this.cabbieId = cabbieId;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public boolean getIsBusy(){
-        return this.isBusy;
-    }
-
-    public void setIsBusy(boolean value){
-        this.isBusy = value;
-    }
-    public float getRate() {
-        return rate;
-    }
-
-
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
 
     /**
      * Returns a string representation of the object.
@@ -152,17 +130,9 @@ public class Cabbie extends Person{
      */
     @Override
     public String toString() {
-        return "Cabbie:" + this.cabbieId + this.name;
+        return String.format(this.email, this.name, this.phone, this.cabbieId, this.rating, this.licenseNumber);
     }
 
-    @Override
-    public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        
-        Cabbie pas = (Cabbie) o;
-        return Objects.equal(this.cabbieId, pas.getCabbieId());
-    }
+
 
 }

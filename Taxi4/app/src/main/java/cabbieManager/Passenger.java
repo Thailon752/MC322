@@ -1,17 +1,14 @@
 package cabbieManager;
+import java.util.ArrayList;
 
-import com.google.common.base.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import utils.PassengerInfoGenerator;
 
+@XmlRootElement
 public class Passenger extends Person{
     private String passengerId;
-    private String email;
-    private String name;
-    private String phone;
-
-    public Passenger() {
-    }
 
     /**
      * Registers a passenger by generating random information.
@@ -73,32 +70,7 @@ public class Passenger extends Person{
             System.out.println("Campo " + field + " atualizado com sucesso!");
         }
 
-        return;
     
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     /**
@@ -109,9 +81,7 @@ public class Passenger extends Person{
     public String getPassengerId() {
         return this.passengerId;
     }
-    public void setPassengerId(String passengerId){
-        this.passengerId = passengerId;
-    }
+
 
     /**
      * Returns a string representation of the object.
@@ -122,16 +92,6 @@ public class Passenger extends Person{
      */
     @Override
     public String toString() {
-        return "Passenger: " + this.email + this.name + this.phone + this.passengerId;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        
-        Passenger pas = (Passenger) o;
-        return Objects.equal(this.passengerId, pas.getPassengerId());
+        return String.format(this.email, this.name, this.phone, this.passengerId);
     }
 }
