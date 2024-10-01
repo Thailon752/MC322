@@ -1,6 +1,9 @@
 package taxi3;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import utils.CabbieInfoGenerator;
 
+@XmlRootElement
 public class Cabbie extends Person{
     private String cabbieId;
     private float rating;

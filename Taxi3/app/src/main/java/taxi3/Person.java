@@ -1,5 +1,7 @@
 package taxi3;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public abstract class Person{
     //Adicionar os atributos da classe Person
     public String name;

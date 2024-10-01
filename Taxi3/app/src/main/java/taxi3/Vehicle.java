@@ -1,7 +1,9 @@
 package taxi3;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import utils.VehicleInfoGenerator;
 
-
+@XmlRootElement
 public class Vehicle {
     private String vehicleId;
     private String registrationNumber;

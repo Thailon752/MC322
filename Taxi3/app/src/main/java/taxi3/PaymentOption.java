@@ -1,4 +1,7 @@
 package taxi3;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 
 public enum PaymentOption {
 

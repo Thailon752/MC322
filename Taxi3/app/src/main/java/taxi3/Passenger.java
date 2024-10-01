@@ -1,7 +1,9 @@
 package taxi3;
 import utils.PassengerInfoGenerator;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-
+@XmlRootElement
 public class Passenger extends Person{
     private String passengerId;
 
