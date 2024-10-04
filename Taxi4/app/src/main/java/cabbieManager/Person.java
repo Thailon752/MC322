@@ -28,17 +28,25 @@ public abstract class Person{
     public abstract void update(String field, String newValue);
     public abstract String toString();
     /**
-     * Geters para os atributos
-     * @return o atributo do geter.
+     * Pega o atributo nome.
+     * @return uma String name da pessoa.
      */
     @XmlElement
     public String getname(){
         return this.name;
     }
+    /**
+     * Pega o atributo email.
+     * @return uma String email da pessoa.
+     */
     @XmlElement
     public String getemail(){
         return this.email;
     }
+    /**
+     * Pega o atributo phone.
+     * @return uma String phone da pessoa.
+     */
     @XmlElement
     public String getphone(){
         return this.phone;

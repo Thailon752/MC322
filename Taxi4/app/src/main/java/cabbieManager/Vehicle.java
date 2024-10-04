@@ -8,6 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import utils.VehicleInfoGenerator;
 
+/**
+ * Objeto usado para identificar o veiculo com o qual a corrida foi feita.
+ * Contem atributos de modelo, numero de registro, ano, Id do veiculo no programa e Id do taxista dono dele. 
+ */
+
 @XmlRootElement
 public class Vehicle {
     private String vehicleId;
@@ -17,28 +22,41 @@ public class Vehicle {
     private String cabbieId;
     
     /**
-     * Pega os atributos de veiculo
-     * 
-     * Abaixo tem um geter para cada atributo que esse objeto tem.
-     * 
-     * @return os atributos
+     * Pega o atributo do veiculo vehicleId.
+     * @return a String vehicleId.
      */
     @XmlElement
     public String getVehicleId() {
         return this.vehicleId;
     }
+    /**
+     * Pega o atributo do veiculo registrationNumber.
+     * @return a String registrationNumber.
+     */
     @XmlElement
     public String getregistration(){
         return this.registrationNumber;
     }
+    /**
+     * Pega o atributo do veiculo model.
+     * @return a String model.
+     */
     @XmlElement
     public String getmodel(){
         return this.model;
     }
+    /**
+     * Pega o atributo do veiculo year.
+     * @return a int year.
+     */
     @XmlElement
     public int getano(){
         return this.year;
     }
+    /**
+     * Pega o atributo do veiculo cabbieId.
+     * @return a String cabbieId.
+     */
     @XmlElement
     public String getVcabID(){
         return this.cabbieId;

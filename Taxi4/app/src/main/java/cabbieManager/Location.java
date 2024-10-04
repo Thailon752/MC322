@@ -1,7 +1,7 @@
 package cabbieManager;
 
 /**
-     * Uma tabela de localizações com coordenadas X e Y
+     * Uma tabela de localizações com coordenadas X e Y.
      * 
      * Ela sera usada para calcular a distancias entre os destinos.
      * 
@@ -30,16 +30,23 @@ public enum Location {
 
     }
     /**
-     * Geters dos atributos de cada localização
-     * @return retorna o atributo da localização que foi chamado.
-     * Pode retornar nome,coordenadaX e coordenadaY.
+     * Pega o atributo nome da Localização.
+     * @return retorna uma String com o nome da localização.
      */
     public String getNome() {
         return nome;
     }
+    /**
+     * Pega o atributo coordenada X da Localização.
+     * @return retorna um int com o valor da coordenada X da localização.
+     */
     public int getCoordenadaX() {
         return coordenadaX;
     }
+    /**
+     * Pega o atributo coordenada Y da Localização.
+     * @return retorna um int com o valor da coordenada Y da localização.
+     */
     public int getCoordenadaY() {
         return coordenadaY;
     }

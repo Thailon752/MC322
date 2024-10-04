@@ -4,6 +4,11 @@ import org.checkerframework.checker.units.qual.t;
 
 import databaseManager.Database;
 
+/**
+ * Registra novos passageiros, taxistas, veiculos, realiza corridas e pagamentos.
+ * E guarda os objetos criados em uma database em Xlm.
+ */
+
 public class Main {
     public static void main(String[] args) throws Exception {
         //Aqui você deve realizar a simulação do funcionamento do sistema.

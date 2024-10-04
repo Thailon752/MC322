@@ -6,13 +6,13 @@ import utils.CabbieInfoGenerator;
 
 /**
  * O objeto Cabbie funciona como um motorista no programa.
- * Ele é uma extensão de Person que tem nome,phone e email
+ * Ele é uma extensão de Person que tem nome,phone e email.
  * E tem seus atributos próprios como cabbieId,rating,licenseNumber e status.
  * O cabbieID é para identificar ele de outro Cabbie com mesmo nome.
- * O ranting é a nota que ele teria no nosso programa, essa nota é dada pelos passengers
- * O LicenseNumber é a licensa que pode ser validada dentro de um banco de dados, para saber se ele ta apto
+ * O ranting é a nota que ele teria no nosso programa, essa nota é dada pelos passengers.
+ * O LicenseNumber é a licensa que pode ser validada dentro de um banco de dados, para saber se ele ta apto.
  * a ser motorista(Isso não foi implementado ainda, mas é por isso que o atributo existe).
- * O status é algo fluido que vai ser atualizado como True quando ele está com passagers e False quando não esta
+ * O status é algo fluido que vai ser atualizado como True quando ele está com passagers e False quando não esta.
  * é mais para dizer sobre a disponibilidade dele para aceitar uma corrida que foi pedida.
  * A função dele é fazer uma corrida de um ponto a outro.
  */
@@ -27,26 +27,33 @@ public class Cabbie extends Person{
     
     
      /**
-     * Geters todos os atributos de Cabbie
-     * 
-     * @return o atributo do geter pedido.
+     * Pega o atributo de Cabbie cabbieId.
+     * @return uma String cabbieId.
      */
     @XmlElement
     public String getCabbieId() {
         return this.cabbieId;
     }
+     /**
+     * Pega o atributo de Cabbie rating.
+     * @return um float rating.
+     */
     @XmlElement
     public float getRate() {
-        return rating;
+        return this.rating;
     }
-    @XmlElement
-    public String getCabbieid() {
-        return this.cabbieId;
-    }
+     /**
+     * Pega o atributo de Cabbie status.
+     * @return um boolean status.
+     */
     @XmlElement
     public boolean getstatus(){
         return this.status;
     }
+     /**
+     * Pega o atributo de Cabbie licenseNumber.
+     * @return uma String licenseNumber.
+     */
     @XmlElement
     public String getLicensenumber(){
        return this.licenseNumber;
@@ -56,16 +63,16 @@ public class Cabbie extends Person{
     /**
      * Seta o rating do taxista
      * @param avalia parametro float que é a nota que ele recebeu pela corrida.
-     * O parametro pode variar de 0-5
-     * chama a função privada caclularanting dando o parametro avalia para ela.
+     * O parametro pode variar de 0-5.
+     * Chama a função privada caclularanting dando o parametro avalia para ela.
      */
     public void setaval(float avalia){
         this.rating =calcularating(avalia);
     }
     /**
-     * Calcula o ranting novo 
+     * Calcula o ranting novo.
      * @param avalia parametro float que é a nota que ele recebeu pela corrida.
-     * O parametro pode variar de 0-5
+     * O parametro pode variar de 0-5.
      * A função calcula fazendo uma média simples com o valor do rating antigo e a nota nova.
      */
     private float calcularating(float avalia){
@@ -78,8 +85,8 @@ public class Cabbie extends Person{
     /**
      * Registra um taxista gerando informações aleatórias.
      * Este método atribui um nome, email, número de telefone, ID do taxista,
-     * tarifa e número da licença aleatórios ao taxista.
-     * E gera um printe de saida mostrando que ele foi gerado
+     * nota e número da licença aleatórios ao taxista.
+     * E gera um printe de saida mostrando que ele foi gerado.
      */
     @Override
     public void register() {
@@ -155,9 +162,9 @@ public class Cabbie extends Person{
     /**
      * Retorna uma representação em string do objeto.
      * 
-     * O formato é: "nome identidade numero de licensa nota telefone e email"
+     * O formato é: "nome identidade numero de licensa nota telefone e email".
      * 
-     * @return uma representação em string do objeto
+     * @return uma representação em string do objeto.
      */
     @Override
     public String toString() {

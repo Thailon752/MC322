@@ -35,35 +35,65 @@ public class Ride {
     private float distance;
     /**
      * Construtor da corrida, para existir a corrida so precisa de um passenger.
-     * @param passengerId uma String que é o id do passenger
+     * @param passengerId uma String que é o id do passenger.
      */
 
     public Ride(String passengerId) {
         this.passengerId = passengerId;
     }
     /**
-     * Geters para os atributos de ride
-     * 
-     * @return o atributo selecionado.
+     * Pega o atributo distance.
+     * @return o float distance.
      */
     public float getRideDistance() {
         return this.distance;
     }
+    /**
+     * Pega o atributo startTime.
+     * @return LocalDateTime da corrida startTime.
+     */
     public LocalDateTime getStartTime() {
         return this.startTime;
     }
+    /**
+     * Pega o atributo rideId.
+     * @return a String rideId.
+     */
     public String getRideId() {
         return this.rideId;
     }
+    /**
+     * Pega o atributo cabbieId.
+     * @return a String cabbieId.
+     */
     public String getCabbieId() {
-        return cabbieId;
+        return this.cabbieId;
     }
+    /**
+     * Pega o atributo passengerId.
+     * @return a String passengerId.
+     */
     public String getPassengerId() {
-        return passengerId;
+        return this.passengerId;
     }
+    /**
+     * Pega o atributo vehicleId .
+     * @return a String vehicleId.
+     */
     public String getVehicleId() {
-        return vehicleId;
+        return this.vehicleId;
     }
+    /**
+     * Pega o atributo status.
+     * @return a String status.
+     * Os status válidos são:
+     * <ul>
+     * <li>Aceita</li>
+     * <li>Em progresso</li>
+     * <li>Finalizada</li>
+     * <li>Solicitada</li>
+     * </ul>
+     */
     public String getStatus() {
         return status;
     }
@@ -84,8 +114,8 @@ public class Ride {
     /**
      * Solicita uma corrida por um passageiro.
      * 
-     * @param pickupLocation  o local onde o passageiro deseja ser buscado
-     * @param dropLocation    o local onde o passageiro deseja ser deixado
+     * @param pickupLocation  o local onde o passageiro deseja ser buscado.
+     * @param dropLocation    o local onde o passageiro deseja ser deixado.
      * 
      * O status da corrida é definido como "SOLICITADA".
      * O startTime é definido como o horário atual.
@@ -189,14 +219,14 @@ public class Ride {
     /**
      * Atualiza o status da corrida.
      * 
-     * Se o status for "ACEPTED", armazena o ID do motorista e do veiculo que
+     * Se o status for "Aceita", armazena o ID do motorista e do veiculo que
      * aceitou a corrida.
      * 
-     * @param status  o novo status da corrida
+     * @param status  o novo status da corrida.
      * @param cabbieId o ID do motorista que aceitou a corrida, se status for
-     *                "ACCEPTED"
+     *                "Aceita" é salvo no objeto, caso contrário não.
      * @param vehicleId o ID do veiculo que aceitou a corrida, se status for
-     *                  "ACCEPTED"
+     *                  "Aceita" é salvo no objeto, caso contrário não.
      */
     public void updateRideStatus(String status, String cabbieId, String vehicleId) {
         

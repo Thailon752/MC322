@@ -81,7 +81,7 @@ public class Passenger extends Person{
     }
 
     /**
-     * Geter do Id do passageiro.
+     * Pega o atributo passengerId.
      * 
      * @return o id do passageiro e ele está no formato UUID
      */

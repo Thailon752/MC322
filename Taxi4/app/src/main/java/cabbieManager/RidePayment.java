@@ -168,34 +168,57 @@ public class RidePayment implements Payment{
         this.amount = Math.round((valor_da_corrida()+taxa*valor_da_corrida())* 100.0f) / 100.0f;
 
     }
-    /**
-     * Geters de todos os atributos
-     * @return os atributos que são chamados.
-     */
-    
-    public float getamont(){
+     /**
+    * Pega o atributo amount.
+    * @return um float amount com precisão de 2 casas.
+    */
+    @Override
+    public float getamount(){
         return this.amount;
     }
+    /**
+    * Pega o atributo ridedistance.
+    * @return um float ridedistance que tem precisão de 2 casas.
+    */
+    @Override
     public float getridedistance(){
         return this.rideDistance;
     }
+    /**
+     * Pega o atributo paymentMethodo.
+     * @return o paymentMethodo que pode ser qualquer um dos que estão registrados no enum PaymentOption.
+     */
+    @Override
     public PaymentOption getoption(){
         return this.paymentMethod;
     }
+    /**
+    * Pega o atributo paymentId.
+    * @return uma String paymentId no formato UUID.
+    */
+    @Override
     public String getpayid(){
         return this.paymentId;
     }
+    /**
+    * Pega o atributo rideId.
+    * @return uma String rideId no formato UUID.
+    */
+    @Override
     public  String getrideid(){
         return this.rideId;
     }
+    /**
+     * Pega o atributo startTime.
+     * @return LocalDateTime da corrida startTime.
+     */
+    @Override
     public LocalDateTime getSTime(){
         return this.rideStartTime;
     }
 
     /**
      * Processa o pagamento da corrida.
-     * 
-     * 
     */
     @Override
     public void processPayment() {
