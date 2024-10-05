@@ -70,19 +70,19 @@ public class CabbieManagerTest {
     @Test
     public void testDiurnalRideWithinRange() {
         RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 5.0f, "Dinheiro");
-        Assertions.assertEquals(15.00f, ridePayment.getamont(), 0);
+        Assertions.assertEquals(15.00f, ridePayment.getamount(), 0);
     }
 
     @Test
     public void testDiurnalRideWithinRange2() {
         RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 18.0f, "Cartão de Débito");
-        Assertions.assertEquals(78f, ridePayment.getamont(), 0);
+        Assertions.assertEquals(78f, ridePayment.getamount(), 0);
     }
 
     @Test
     public void testNocturnalRideWithinRange() {
         RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 20, 0), 5.0f, "Dinheiro");
-        Assertions.assertEquals(18.50f, ridePayment.getamont(), 0);
+        Assertions.assertEquals(18.50f, ridePayment.getamount(), 0);
     }
 
     @Test
