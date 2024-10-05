@@ -23,10 +23,12 @@ public abstract class Person{
      * a função register, registra uma nova extensão com dados aleatórios
      * a função update, permite que seja atualizado alguns dos atributos das extensões
      * a função toString, printa uma string que simboliza a extensão.
+     * a função isequals compara o objeto com outro dado.
      */
     public abstract void register();
     public abstract void update(String field, String newValue);
     public abstract String toString();
+    public abstract boolean isequals(Object clas);
     /**
      * Pega o atributo nome.
      * @return uma String name da pessoa.
@@ -51,5 +53,6 @@ public abstract class Person{
     public String getphone(){
         return this.phone;
     }
+    
     
 }

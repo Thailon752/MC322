@@ -39,5 +39,12 @@ public interface Payment {
      * Processa o Pagamento.
      */
     public abstract void processPayment();
+    /**
+     * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
+     * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.
+     * @return A função retorna verdadeiro ou falso dependendo do objeto dado.
+     * Caso seja um objeto igual é verdadeiro, caso seja de outra classe ou outro objeto da mesma classe retorna falso.
+     */
+    public abstract boolean isequals(Object clas);
     
 }

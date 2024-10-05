@@ -142,6 +142,21 @@ public class Vehicle {
     public String toString() {
         return String.format(this.vehicleId, this.registrationNumber, this.model, this.year, this.cabbieId);
     }
+    /**
+     * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
+     * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.
+     * @return A função retorna verdadeiro ou falso dependendo do objeto dado.
+     * Caso seja um objeto igual é verdadeiro, caso seja de outra classe ou outro objeto da mesma classe retorna falso.
+     */
+    public boolean isequals(Object clas){
+        if (this.getClass().equals(clas.getClass())){
+            Vehicle prov = (Vehicle) clas;
+            if(this.vehicleId.equalsIgnoreCase(prov.getVcabID())){
+                return true;
+            }
+        }
+        return false;
+    }
 
     
 }

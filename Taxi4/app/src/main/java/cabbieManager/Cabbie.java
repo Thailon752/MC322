@@ -155,8 +155,22 @@ public class Cabbie extends Person{
         }
 
     }
-    
-    
+    /**
+     * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
+     * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.
+     * @return A função retorna verdadeiro ou falso dependendo do objeto dado.
+     * Caso seja um objeto igual é verdadeiro, caso seja de outra classe ou outro objeto da mesma classe retorna falso.
+     */
+    @Override
+    public boolean isequals(Object clas){
+        if (this.getClass().equals(clas.getClass())){
+            Cabbie prov = (Cabbie) clas;
+            if(this.cabbieId.equalsIgnoreCase(prov.getCabbieId())){
+                return true;
+            }
+        }
+        return false;
+    }
    
 
     /**

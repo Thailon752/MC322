@@ -224,6 +224,21 @@ public class RidePayment implements Payment{
     public void processPayment() {
         System.out.println("Pagamento realizado com sucesso!");
     }
-
+    /**
+     * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
+     * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.
+     * @return A função retorna verdadeiro ou falso dependendo do objeto dado.
+     * Caso seja um objeto igual é verdadeiro, caso seja de outra classe ou outro objeto da mesma classe retorna falso.
+     */
+    @Override
+    public boolean isequals(Object clas){
+        if (this.getClass().equals(clas.getClass())){
+            RidePayment prov = (RidePayment) clas;
+            if(this.paymentId.equalsIgnoreCase(prov.getpayid())){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
