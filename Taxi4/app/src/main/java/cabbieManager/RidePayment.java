@@ -8,6 +8,7 @@ import utils.LocalDateTimeAdapter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -37,7 +38,6 @@ public class RidePayment implements Payment{
     private final float rideDistance;
     private float amount;
     private final PaymentOption paymentMethod;
-
 
        
     // IMPLEMENTAR CONSTRUTUOR DA CLASS
@@ -173,6 +173,7 @@ public class RidePayment implements Payment{
     * @return um float amount com precisão de 2 casas.
     */
     @Override
+    @XmlElement
     public float getamount(){
         return this.amount;
     }
@@ -181,6 +182,7 @@ public class RidePayment implements Payment{
     * @return um float ridedistance que tem precisão de 2 casas.
     */
     @Override
+    @XmlElement
     public float getridedistance(){
         return this.rideDistance;
     }
@@ -189,6 +191,7 @@ public class RidePayment implements Payment{
      * @return o paymentMethodo que pode ser qualquer um dos que estão registrados no enum PaymentOption.
      */
     @Override
+    @XmlElement
     public PaymentOption getoption(){
         return this.paymentMethod;
     }
@@ -197,6 +200,7 @@ public class RidePayment implements Payment{
     * @return uma String paymentId no formato UUID.
     */
     @Override
+    @XmlElement
     public String getpayid(){
         return this.paymentId;
     }
@@ -205,6 +209,7 @@ public class RidePayment implements Payment{
     * @return uma String rideId no formato UUID.
     */
     @Override
+    @XmlElement
     public  String getrideid(){
         return this.rideId;
     }
@@ -213,6 +218,7 @@ public class RidePayment implements Payment{
      * @return LocalDateTime da corrida startTime.
      */
     @Override
+    @XmlElement
     public LocalDateTime getSTime(){
         return this.rideStartTime;
     }

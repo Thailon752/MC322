@@ -101,7 +101,7 @@ public class Main {
         System.out.println("-----------------------------------");
         System.out.println("Fechando e reabrindo banco de dados\n");
 
-        // db = new Database(true);
+        db = new Database(true);
 
         System.out.println("Printando dados:");
         System.out.println(db.getPassengers());

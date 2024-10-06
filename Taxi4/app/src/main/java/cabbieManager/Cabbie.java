@@ -1,6 +1,7 @@
 package cabbieManager;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import utils.CabbieInfoGenerator;
 
@@ -16,7 +17,6 @@ import utils.CabbieInfoGenerator;
  * é mais para dizer sobre a disponibilidade dele para aceitar uma corrida que foi pedida.
  * A função dele é fazer uma corrida de um ponto a outro.
  */
-
 @XmlRootElement
 public class Cabbie extends Person{
     private String cabbieId;
@@ -24,7 +24,9 @@ public class Cabbie extends Person{
     private String licenseNumber;
     private boolean status;
     
-    
+    public Cabbie(){
+        
+    }
     
      /**
      * Pega o atributo de Cabbie cabbieId.

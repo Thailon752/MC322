@@ -21,6 +21,20 @@ public class Vehicle {
     private int year;
     private String cabbieId;
     
+    
+    public Vehicle(){
+        
+    }
+
+    /**
+     * Construtor do veiculo 
+     * @param cabbieId identificação do dono do carro
+     * Apenas seta o dono.
+     */
+    public Vehicle(String cabbieId) {
+        this.cabbieId = cabbieId;
+    }
+
     /**
      * Pega o atributo do veiculo vehicleId.
      * @return a String vehicleId.
@@ -62,14 +76,7 @@ public class Vehicle {
         return this.cabbieId;
     }
 
-    /**
-     * Construtor do veiculo 
-     * @param cabbieId identificação do dono do carro
-     * Apenas seta o dono.
-     */
-    public Vehicle(String cabbieId) {
-        this.cabbieId = cabbieId;
-    }
+
 
     /**
      * Registra o veiculo com informações randomizadas fornecidas pelo Vehicleinforgenerator.

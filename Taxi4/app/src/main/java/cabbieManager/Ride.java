@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
  * O objeto ride vai ser usado como um intermediario para registrar que a corrida aconteceu.
@@ -33,6 +34,10 @@ public class Ride {
     private Location dropLocation;
     private LocalDateTime startTime;
     private float distance;
+
+    public Ride(){
+        
+    }
     /**
      * Construtor da corrida, para existir a corrida so precisa de um passenger.
      * @param passengerId uma String que é o id do passenger.
@@ -45,6 +50,7 @@ public class Ride {
      * Pega o atributo distance.
      * @return o float distance.
      */
+    @XmlElement
     public float getRideDistance() {
         return this.distance;
     }
@@ -52,6 +58,7 @@ public class Ride {
      * Pega o atributo startTime.
      * @return LocalDateTime da corrida startTime.
      */
+    @XmlElement
     public LocalDateTime getStartTime() {
         return this.startTime;
     }
@@ -59,6 +66,7 @@ public class Ride {
      * Pega o atributo rideId.
      * @return a String rideId.
      */
+    @XmlElement
     public String getRideId() {
         return this.rideId;
     }
@@ -66,6 +74,7 @@ public class Ride {
      * Pega o atributo cabbieId.
      * @return a String cabbieId.
      */
+    @XmlElement
     public String getCabbieId() {
         return this.cabbieId;
     }
@@ -73,6 +82,7 @@ public class Ride {
      * Pega o atributo passengerId.
      * @return a String passengerId.
      */
+    @XmlElement
     public String getPassengerId() {
         return this.passengerId;
     }
@@ -80,6 +90,7 @@ public class Ride {
      * Pega o atributo vehicleId .
      * @return a String vehicleId.
      */
+    @XmlElement
     public String getVehicleId() {
         return this.vehicleId;
     }
@@ -94,6 +105,7 @@ public class Ride {
      * <li>Solicitada</li>
      * </ul>
      */
+    @XmlElement
     public String getStatus() {
         return status;
     }

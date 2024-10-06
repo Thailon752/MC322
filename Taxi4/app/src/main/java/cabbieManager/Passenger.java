@@ -2,6 +2,7 @@ package cabbieManager;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import utils.PassengerInfoGenerator;
 /**
@@ -11,12 +12,13 @@ import utils.PassengerInfoGenerator;
  * passenger com possiveis nomes,email e telefones iguais. Teoricamente são unicos no programa.
  * No programa o passenger requesita corrida para onde ele deseja ir.
  */
-
-
 @XmlRootElement
 public class Passenger extends Person{
     private String passengerId;
 
+    public Passenger(){
+        
+    }
     /**
      * Registra um Passenger dando atributos aleatórios gerados pelo PassengerInforGernerator
      * Esse metodo seta randomicament o email, name, phone number e ID do passenger.

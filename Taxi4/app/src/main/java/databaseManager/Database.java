@@ -13,7 +13,7 @@ import javax.xml.bind.Unmarshaller;
 
 import cabbieManager.Cabbie;
 import cabbieManager.Passenger;
-import cabbieManager.Payment;
+import cabbieManager.RidePayment;
 import cabbieManager.Ride;
 import cabbieManager.Vehicle;
 
@@ -22,17 +22,13 @@ public class Database{
     private List<Cabbie> cabbies = new ArrayList<>();
     private List<Ride> rides = new ArrayList<>();
     private List<Vehicle> vehicles = new ArrayList<>();
-    private List<Payment> payments = new ArrayList<>();
+    private List<RidePayment> Ridepayments = new ArrayList<>();
 
 
 
 
     
     private final File file = new File("app/data/database.xml");
-
-
-    public Database(){
-    }
 
     public Database(boolean load){
         if(load){
@@ -53,8 +49,8 @@ public class Database{
     public List<Vehicle> getVehicles(){
         return this.vehicles;
     }
-    public List<Payment> getPayments(){
-        return this.payments;
+    public List<RidePayment> getRidePayments(){
+        return this.Ridepayments;
     }
 
     public void insert(Object object){
@@ -113,7 +109,7 @@ public class Database{
                 this.passengers = db.getPassengers();
                 this.rides = db.getRides();
                 this.vehicles = db.getVehicles();
-                this.payments = db.getPayments();
+                this.Ridepayments = db.getRidePayments();
             } catch (Exception e) {
                 e.printStackTrace();
             }

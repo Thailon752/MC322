@@ -13,9 +13,9 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlSeeAlso({Passenger.class, Cabbie.class})
 @XmlRootElement
 public abstract class Person{
-    public String name;
-    public String email;
-    public String phone;
+    protected String name;
+    protected String email;
+    protected String phone;
 
     /**
      * Essas funções são abstratas e vão ser implementadas nas extensões
