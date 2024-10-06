@@ -2,19 +2,21 @@ package databaseManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import cabbieManager.Cabbie;
 import cabbieManager.Passenger;
-import cabbieManager.RidePayment;
 import cabbieManager.Ride;
+import cabbieManager.RidePayment;
 import cabbieManager.Vehicle;
 
 public class Database{
@@ -22,7 +24,7 @@ public class Database{
     private List<Cabbie> cabbies = new ArrayList<>();
     private List<Ride> rides = new ArrayList<>();
     private List<Vehicle> vehicles = new ArrayList<>();
-    private List<RidePayment> Ridepayments = new ArrayList<>();
+    private List<RidePayment> ridepayments = new ArrayList<>();
 
 
 
@@ -50,7 +52,7 @@ public class Database{
         return this.vehicles;
     }
     public List<RidePayment> getRidePayments(){
-        return this.Ridepayments;
+        return this.ridepayments;
     }
 
     public void insert(Object object){
@@ -81,19 +83,17 @@ public class Database{
     }
 
     private void save(){
-        if(file.exists()){
-            try {
-                JAXBContext context = JAXBContext.newInstance(Database.class);
-                Marshaller marshaller = context.createMarshaller();
-                marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                OutputStream outputStream = new FileOutputStream(this.file);
-                marshaller.marshal(this, outputStream);
-                outputStream.close();
+        try {
+            JAXBContext context = JAXBContext.newInstance(Database.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            OutputStream outputStream = new FileOutputStream(this.file);
+            marshaller.marshal(this, outputStream);
+            outputStream.close();
 
                 
-            } catch (Exception e) {
+        } catch (JAXBException | IOException e) {
                 e.printStackTrace();
-            }
         }
     }
 
@@ -109,8 +109,8 @@ public class Database{
                 this.passengers = db.getPassengers();
                 this.rides = db.getRides();
                 this.vehicles = db.getVehicles();
-                this.Ridepayments = db.getRidePayments();
-            } catch (Exception e) {
+                this.ridepayments = db.getRidePayments();
+            } catch (JAXBException | IOException e) {
                 e.printStackTrace();
             }
         }
