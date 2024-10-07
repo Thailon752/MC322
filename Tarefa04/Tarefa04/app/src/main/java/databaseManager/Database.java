@@ -31,12 +31,10 @@ public class Database{
 
     private final File file = new File("Tarefa04/app/data/database.xml");
 
-    // Construtor padrão exigido pelo JAXB
     public Database() {
-        // necessário para JAXB
+    
     }
 
-    // Construtor com parâmetro para carregar dados
     public Database(boolean load){
         if(load){
             this.load();
