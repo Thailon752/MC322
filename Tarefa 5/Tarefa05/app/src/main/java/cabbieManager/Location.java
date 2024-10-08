@@ -38,6 +38,7 @@ public enum Location {
                 return location;
             }
         }
+        return null;
 
     }
 

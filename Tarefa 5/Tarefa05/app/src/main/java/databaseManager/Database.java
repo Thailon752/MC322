@@ -22,7 +22,6 @@ import cabbieManager.Passenger;
 import cabbieManager.Ride;
 import cabbieManager.RidePayment;
 import cabbieManager.Vehicle;
-import exceptions.*;
 
 @XmlRootElement(name="database")
 public class Database{
