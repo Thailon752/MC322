@@ -2,62 +2,87 @@ package databaseManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import cabbieManager.Cabbie;
 import cabbieManager.Passenger;
-import cabbieManager.Ride;
 import cabbieManager.RidePayment;
+import cabbieManager.Ride;
 import cabbieManager.Vehicle;
 
+
+@XmlRootElement
 public class Database{
     private List<Passenger> passengers = new ArrayList<>();
     private List<Cabbie> cabbies = new ArrayList<>();
     private List<Ride> rides = new ArrayList<>();
     private List<Vehicle> vehicles = new ArrayList<>();
-    private List<RidePayment> ridepayments = new ArrayList<>();
+    private List<RidePayment> Ridepayments = new ArrayList<>();
 
-
-
-
-    
     private final File file = new File("app/data/database.xml");
 
-    public Database(boolean load){
-        if(load){
-            this.load();
-        }
-    }
-    
-    public List<Passenger> getPassengers(){
-        return this.passengers;
-    }
-    public List<Cabbie> getCabbies(){
-        return this.cabbies;
-    }
-    public List<Ride> getRides(){
-        return this.rides;
+    public Database(){
 
     }
-    public List<Vehicle> getVehicles(){
+    
+    public Database(boolean load){
+        if(load){
+            load();
+        }
+        
+    }
+    @XmlElementWrapper(name="cabbies")
+    @XmlElement(name = "cabbie")
+    public List<Cabbie> getcabbies() {
+        return this.cabbies;
+    }
+    @XmlElementWrapper(name="passengers")
+    @XmlElement(name = "passenger")
+    public List<Passenger> getpassengers() {
+        return this.passengers;
+    }
+    @XmlElementWrapper(name="rides")
+    @XmlElement(name = "ride")
+    public List<Ride> getrides() {
+        return this.rides;
+    }
+    @XmlElementWrapper(name="vehicles")
+    @XmlElement(name = "vehicle")
+    public List<Vehicle> getvehicles() {
         return this.vehicles;
     }
-    public List<RidePayment> getRidePayments(){
-        return this.ridepayments;
+    @XmlElementWrapper(name="ridePayments")
+    @XmlElement(name = "ridePayment")
+    public List<RidePayment> getridePayments() {
+        return this.Ridepayments;
     }
+    
 
     public void insert(Object object){
         if(object instanceof Passenger){
             this.passengers.add((Passenger) object);
+        }
+        else if(object instanceof Cabbie){
+            this.cabbies.add((Cabbie) object);
+        }
+        else if(object instanceof Ride){
+            this.rides.add((Ride) object);
+        }
+        else if(object instanceof Vehicle){
+            this.vehicles.add((Vehicle) object);
+        }
+        else if(object instanceof RidePayment){
+            this.Ridepayments.add((RidePayment) object);
         }
 
         this.save();
@@ -65,10 +90,11 @@ public class Database{
 
     private <T> void update(T newItem, List<T> data){
         for(int i=0;i<data.size();i++){
-            Object item = data.get(i);
+            T item = data.get(i);
 
             if(item.equals(newItem)){
                 data.set(i, newItem);
+                break;
             }
         }
     }
@@ -76,27 +102,43 @@ public class Database{
     public void update(Object object){
         if(object instanceof Passenger){
             this.update((Passenger)object, this.passengers);
-        }else{
+        }
+        else if(object instanceof Cabbie){
+            this.update((Cabbie) object, this.cabbies);
+        }
+        else if(object instanceof Vehicle){
+            this.update((Vehicle) object, this.vehicles);
+        }
+        else if(object instanceof Ride){
+            this.update((Ride) object, this.rides);
+        }
+        else if(object instanceof RidePayment){
+            this.update((RidePayment) object, this.Ridepayments);
+        }
+        else{
             return;
         }
         this.save();       
     }
 
     private void save(){
-        try {
-            JAXBContext context = JAXBContext.newInstance(Database.class);
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            OutputStream outputStream = new FileOutputStream(this.file);
-            marshaller.marshal(this, outputStream);
-            outputStream.close();
+        if(file.exists()){
+            try {
+                JAXBContext context = JAXBContext.newInstance(Database.class);
+                Marshaller marshaller = context.createMarshaller();
+                marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "app/data/database.xsd");
+                marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                OutputStream outputStream = new FileOutputStream(this.file);
+                marshaller.marshal(this, outputStream);
+                outputStream.close();
 
                 
-        } catch (JAXBException | IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+            }
         }
     }
-
+    
     private void load() {
         if (file.exists()) {
             try {
@@ -105,14 +147,19 @@ public class Database{
                 InputStream inputStream = new FileInputStream(this.file);
                 Database db = (Database) unmarshaller.unmarshal(inputStream);
                 inputStream.close();
-                this.cabbies = db.getCabbies();
-                this.passengers = db.getPassengers();
-                this.rides = db.getRides();
-                this.vehicles = db.getVehicles();
-                this.ridepayments = db.getRidePayments();
-            } catch (JAXBException | IOException e) {
+    
+        
+    
+                // Atribua os dados carregados
+                this.cabbies = db.getcabbies();
+                this.passengers = db.getpassengers();
+                this.rides = db.getrides();
+                this.vehicles = db.getvehicles();
+                this.Ridepayments = db.getridePayments();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+    
 }

@@ -1,0 +1,113 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Root element -->
+    <xs:element name="database">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cabbies" type="CabbiesType"/>
+                <xs:element name="passengers" type="PassengersType"/>
+                <xs:element name="paymentMethods" type="RidePaymentType"/>
+                <xs:element name="rides" type="RidesType"/>
+                <xs:element name="vehicles" type="VehiclesType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Cabbies section -->
+    <xs:complexType name="CabbiesType">
+        <xs:sequence>
+            <xs:element name="cabbie" type="CabbieType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CabbieType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="cabbieId" type="xs:string"/>
+            <xs:element name="rating" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="licenseNumber" type="xs:string"/>
+            <xs:element name="status" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Passengers section -->
+    <xs:complexType name="PassengersType">
+        <xs:sequence>
+            <xs:element name="passenger" type="PassengerType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PassengerType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="passengerId" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Ride Payment section -->
+    <xs:complexType name="RidePaymentType">
+        <xs:sequence>
+            <xs:element name="ridePayment" type="RidePaymentDetailsType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RidePaymentDetailsType">
+        <xs:sequence>
+            <xs:element name="paymentId" type="xs:string"/>
+            <xs:element name="rideId" type="xs:string"/>
+            <xs:element name="rideDistance" type="xs:decimal"/>
+            <xs:element name="amount" type="xs:decimal"/>
+            <xs:element name="rideStartTime" type="xs:dateTime"/>
+            <xs:element name="paymentMethod" type="xs:string"/>
+            
+            
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Rides section -->
+    <xs:complexType name="RidesType">
+        <xs:sequence>
+            <xs:element name="ride" type="RideType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RideType">
+        <xs:sequence>
+            <xs:element name="rideId" type="xs:string"/>
+            <xs:element name="passengerId" type="xs:string"/>
+            <xs:element name="cabbieId" type="xs:string"/>
+            <xs:element name="vehicleId" type="xs:string"/>
+            <xs:element name="pickupLocation" type="xs:string"/>
+            <xs:element name="dropLocation" type="xs:string"/>
+            <xs:element name="rideDistance" type="xs:decimal"/>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="startTime" type="xs:dateTime"/>
+            
+            
+            
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Vehicles section -->
+    <xs:complexType name="VehiclesType">
+        <xs:sequence>
+            <xs:element name="vehicle" type="VehicleType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="VehicleType">
+        <xs:sequence>
+            <xs:element name="vehicleId" type="xs:string"/>
+            <xs:element name="registrationNumber" type="xs:string"/>
+            <xs:element name="cabbieId" type="xs:string"/>
+            <xs:element name="model" type="xs:string"/>
+            <xs:element name="year" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
