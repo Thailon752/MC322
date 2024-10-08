@@ -15,7 +15,7 @@ import utils.CabbieInfoGenerator;
  * a ser motorista(Isso não foi implementado ainda, mas é por isso que o atributo existe).
  * O status é algo fluido que vai ser atualizado como True quando ele está com passagers e False quando não esta.
  * é mais para dizer sobre a disponibilidade dele para aceitar uma corrida que foi pedida.
- * A função dele é fazer uma corrida de um ponto a outro.
+ * A função dele é fazer uma corrida de um ponto a outro..
  */
 @XmlRootElement(name = "Cabbie")
 @XmlType(propOrder = {"name","cabbieId","rating", "phone","email","licenseNumber","status"})
