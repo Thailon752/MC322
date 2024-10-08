@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<database>
+    <passengers>
+        <email>felipe.oliveira@email.com</email>
+        <name>Estevão</name>
+        <passengerId>a2d7a59a-532b-4817-ac53-a7cbfbc1ef21</passengerId>
+        <phone>+55 85 93456-7890</phone>
+    </passengers>
+</database>
