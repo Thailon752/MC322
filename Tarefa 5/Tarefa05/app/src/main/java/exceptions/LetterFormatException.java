@@ -1,6 +1,9 @@
 package exceptions;
 
 import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
+/**
+ * Exceção que lida quando o nome não tem apenas caracteres de letras.
+ */
 
 public class LetterFormatException extends IllegalArgumentException{
     /**

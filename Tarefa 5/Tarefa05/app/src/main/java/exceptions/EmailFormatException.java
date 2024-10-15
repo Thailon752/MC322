@@ -1,6 +1,9 @@
 package exceptions;
 
 import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
+/**
+ * Exceção que lida quando o email não tem @ para gerar o dominio.
+ */
 
 public class EmailFormatException extends IllegalArgumentException{
     /**

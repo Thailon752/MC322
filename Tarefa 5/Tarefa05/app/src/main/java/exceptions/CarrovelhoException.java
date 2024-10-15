@@ -1,7 +1,9 @@
 package exceptions;
 
 import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
-
+/**
+ * Exceção que lida com o ano do cara ser muito velho.
+ */
 public class CarrovelhoException extends Exception{
     /**
      * Construtor da exceção com mensagem
