@@ -7,16 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.function.Executable;
-
-import cabbieManager.Cabbie;
-import cabbieManager.Ride;
 import databaseManager.*;
 import exceptions.*;
-
-import org.junit.jupiter.api.Test;
-
+@SuppressWarnings("unused")
 public class HackerTest {
 
     //IMPLEMENTE ABAIXO OS TESTES UNITÁRIOS ADICIONAIS PARA OS 3 TRATAMENTOS DE ERRO IDENTIFICADOS
@@ -123,7 +116,7 @@ public class HackerTest {
     
     
     }
-        /**
+    /**
      * Tests if the constructor RidePayment throws an InvalidPaymentMethodException 
      * when an unsupported payment method is used.
      * 

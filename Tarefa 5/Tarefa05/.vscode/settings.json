@@ -1,5 +1,8 @@
 {
+    "java.jdt.ls.java.home": "C:/Program Files/Eclipse Adoptium/jdk-21.0.4.7-hotspot",
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "interactive",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    
+
 }

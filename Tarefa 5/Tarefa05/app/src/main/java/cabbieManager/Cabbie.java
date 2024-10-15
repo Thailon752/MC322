@@ -3,7 +3,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import exceptions.CarrovelhoException;
 import exceptions.EmailFormatException;
 import exceptions.LetterFormatException;
 import utils.CabbieInfoGenerator;
@@ -240,6 +239,13 @@ public class Cabbie extends Person{
             case "licenseNumber":
                 this.licenseNumber = newValue;
                 break;
+            case "status":
+                if(newValue.equalsIgnoreCase("false")){
+                    this.status = false;
+                }
+                else{
+                    this.status = true;
+                }
             default:
                 validField = false;
                 System.out.println("Campo inválido");

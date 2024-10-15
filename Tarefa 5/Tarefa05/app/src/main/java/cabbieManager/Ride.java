@@ -223,6 +223,7 @@ public class Ride {
      * O startTime é definido como o horário atual.
      * 
      * Uma mensagem é exibida no console com as informações da corrida.
+     * Alerta exceções caso tenha localização invalida,
      */
     public void requestRide(String pickupLocationName, String dropLocationName) {
         this.startTime = LocalDateTime.now();

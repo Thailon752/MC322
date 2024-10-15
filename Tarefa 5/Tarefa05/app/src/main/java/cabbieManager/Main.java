@@ -37,7 +37,7 @@ public class Main {
         // Update Instances
 
         cab.update("name", "Martina");
-        p.update("name", "Estevão");
+        p.update("name", "Macarena");
         v.updateVehicle("registrationNumber", "ABD123");
 
         // Save Instancesinto the XML database
@@ -51,7 +51,7 @@ public class Main {
         db.insert(ride);
 
         // Accept Ride
-        cab.update("isBusy", "true");
+        cab.update("status", "true");
         ride.updateRideStatus("ACEITA", cab.getcabbieId(), v.getVehicleId());
         ride.updateRideStatus("EM_PROGRESSO", null, null);
 
@@ -66,7 +66,7 @@ public class Main {
 
         //Finish Ride
         ride.completeRide(cab,false);
-        cab.update("isBusy", "false");
+        cab.update("status", "false");
 
         db.update(ride);
         db.update(cab);
@@ -80,7 +80,7 @@ public class Main {
     
 
         // Accept Ride
-        cab.update("isBusy", "true");
+        cab.update("status", "true");
         ride_2.updateRideStatus("ACEITA", cab.getcabbieId(), v.getVehicleId());
         ride_2.updateRideStatus("EM_PROGRESSO", null, null);
 
@@ -95,7 +95,7 @@ public class Main {
 
         //Finish Ride
         ride.completeRide(cab,true);
-        cab.update("isBusy", "false");
+        cab.update("status", "false");
 
         db.update(ride);
         db.update(cab);

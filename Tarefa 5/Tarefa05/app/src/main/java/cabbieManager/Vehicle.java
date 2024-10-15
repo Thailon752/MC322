@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import exceptions.CarrovelhoException;
-import exceptions.LetterFormatException;
+
 
 
 /**

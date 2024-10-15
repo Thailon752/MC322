@@ -139,7 +139,7 @@ public class Database {
         } else if (object instanceof RidePayment) {
             this.Ridepayments.add((RidePayment) object);
         }
-
+        System.out.println("Salvando...");
         this.save();
     }
 
