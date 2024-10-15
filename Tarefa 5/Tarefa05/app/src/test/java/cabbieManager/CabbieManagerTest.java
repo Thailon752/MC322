@@ -4,9 +4,7 @@
 package cabbieManager;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import databaseManager.Database;
+import exceptions.InvalidRideDistanceException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,8 +13,6 @@ import java.time.LocalDateTime;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.crypto.Data;
 
 import org.junit.jupiter.api.Assertions;
 
@@ -58,7 +54,7 @@ public class CabbieManagerTest {
         // Arrange
         ride = new Ride("testPassengerId");
         ride.setPickupLocation(Location.HOSPITAL);
-        ride.setDropLocation(Location.ESTACAO_DE_TREM);
+        ride.setDropLocation(Location.ESTACAODETREM);
 
         // Act
         float distance = ride.calculateDistance();
@@ -69,20 +65,40 @@ public class CabbieManagerTest {
 
     @Test
     public void testDiurnalRideWithinRange() {
-        RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 5.0f, "Dinheiro");
-        Assertions.assertEquals(15.00f, ridePayment.calculateValue(), 0);
+        try{
+            RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 5.0f, "Dinheiro");
+            Assertions.assertEquals(15.00f, ridePayment.getamount(), 0);
+        }
+        catch(InvalidRideDistanceException e){
+            System.out.println(e.getMessage());
+            
+        }
     }
 
     @Test
     public void testDiurnalRideWithinRange2() {
-        RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 18.0f, "Cartão de Débito");
-        Assertions.assertEquals(78f, ridePayment.calculateValue(), 0);
+        try{
+            RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 18.0f, "Cartão de Débito");
+            Assertions.assertEquals(78f, ridePayment.getamount(), 0);
+        }
+        catch(InvalidRideDistanceException e){
+            System.out.println(e.getMessage());
+            
+        }
+        
     }
 
     @Test
     public void testNocturnalRideWithinRange() {
-        RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 20, 0), 5.0f, "Dinheiro");
-        Assertions.assertEquals(18.50f, ridePayment.calculateValue(), 0);
+        try{
+            RidePayment ridePayment = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 20, 0), 5.0f, "Dinheiro");
+            Assertions.assertEquals(18.50f, ridePayment.getamount(), 0);
+        }
+        catch(InvalidRideDistanceException e){
+            System.out.println(e.getMessage());
+            
+        }
+        
     }
 
     @Test

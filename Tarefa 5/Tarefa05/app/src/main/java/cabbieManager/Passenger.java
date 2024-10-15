@@ -2,24 +2,27 @@ package cabbieManager;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.google.common.base.Objects;
+import javax.xml.bind.annotation.XmlType;
 
 import utils.PassengerInfoGenerator;
-
-@XmlRootElement(name="passenger")
+/**
+ * O objeto passenger funciona como passageiro no nosso programa.
+ * Ele é uma extensão de person que contem name,phone e email.
+ * E também tem seu atributo próprio que é o passengerId que é usado para diferenciar de outros
+ * passenger com possiveis nomes,email e telefones iguais. Teoricamente são unicos no programa.
+ * No programa o passenger requesita corrida para onde ele deseja ir.
+ */
+@XmlRootElement(name = "Passenger")
+@XmlType(propOrder = {"name","passengerId","phone", "email"})
 public class Passenger extends Person{
     private String passengerId;
-    private String email;
-    private String name;
-    private String phone;
 
-    public Passenger() {
+    public Passenger(){
+        
     }
-
     /**
-     * Registers a passenger by generating random information.
-     * This method assigns a random email, name, phone number, and user ID to the passenger.
+     * Registra um Passenger dando atributos aleatórios gerados pelo PassengerInforGernerator
+     * Esse metodo seta randomicament o email, name, phone number e ID do passenger.
      * 
      */
     @Override
@@ -33,14 +36,13 @@ public class Passenger extends Person{
         System.out.println("Pessoa passageira " + this.passengerId + " (" + this.name + ") criada com sucesso");
     
     }
-
     /**
-     * Updates a field of the passenger.
+     * Atualiza um campo do passageiro.
      * 
-     * @param field The field to be updated.
-     * @param newValue The new value for the field.
+     * @param field O campo a ser atualizado.
+     * @param newValue O novo valor para o campo.
      * 
-     * The valid fields are:
+     * Os campos válidos são:
      * <ul>
      * <li>name</li>
      * <li>email</li>
@@ -48,7 +50,7 @@ public class Passenger extends Person{
      * <li>passengerId</li>
      * </ul>
      * 
-     * If the field is not valid, a message is printed and the field is not updated.
+     * Se o campo não for válido, uma mensagem é exibida e o campo não é atualizado.
      */
     @Override
     public void update(String field, String newValue){
@@ -77,69 +79,99 @@ public class Passenger extends Person{
             System.out.println("Campo " + field + " atualizado com sucesso!");
         }
 
-        return;
     
     }
-
-    @XmlElement(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    /**
+     * Pega o atributo nome.
+     * @return uma String name da pessoa.
+     */
     @XmlElement(name = "name")
-    public String getName() {
-        return name;
+    public String getname(){
+        return this.name;
     }
-
-    public void setName(String name) {
+    /**
+     * Seta o name do Passenger.
+     * @param name String que vai ser colocado no status.
+     */
+    public void setname(String name) {
         this.name = name;
     }
-    
-    @XmlElement(name = "phone")
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     /**
-     * Gets the ID of the passenger.
+     * Pega o atributo passengerId.
      * 
-     * @return the ID of the passenger (a UUID)
+     * @return o id do passageiro e ele está no formato UUID.
      */
     @XmlElement(name = "passengerId")
     public String getPassengerId() {
         return this.passengerId;
     }
-    public void setPassengerId(String passengerId){
-        this.passengerId = passengerId;
+    /**
+     * Seta o passengerId do Passenger.
+     * @param ID String que sera colocada no passengerId.
+     */
+    public void setPassengerId(String ID){
+        this.passengerId = ID;
+    }
+    
+    /**
+     * Pega o atributo email.
+     * @return uma String email da pessoa.
+     */
+    @XmlElement(name = "email")
+    public String getemail(){
+        return this.email;
+    }
+    /**
+     * Seta o email do Passenger.
+     * @param email String que sera colocada no email.
+     */
+    public void setemail(String email) {
+        this.email = email;
+    }
+    /**
+     * Pega o atributo phone.
+     * @return uma String phone da pessoa.
+     */
+    @XmlElement(name = "phone")
+    public String getphone(){
+        return this.phone;
+    }
+    /**
+     * Seta o phone do Passenger.
+     * @param phone String que sera colocada no phone.
+     */
+    public void setphone(String phone) {
+        this.phone = phone;
     }
 
+
     /**
-     * Returns a string representation of the object.
+     * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
+     * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.
+     * @return A função retorna verdadeiro ou falso dependendo do objeto dado.
+     * Caso seja um objeto igual é verdadeiro, caso seja de outra classe ou outro objeto da mesma classe retorna falso.
+     */
+    @Override
+    public boolean isequals(Object clas){
+        if (this.getClass().equals(clas.getClass())){
+            Passenger prov = (Passenger) clas;
+            if(this.passengerId.equalsIgnoreCase(prov.getPassengerId())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Retorna uma representação do objeto em formato de string.
      * 
-     * The format is: "email name phone passengerId"
+     * O formato é: "nome, id do passageiro, telefone e email".
      * 
-     * @return a string representation of the object
+     * @return String que representa o objeto.
      */
     @Override
     public String toString() {
-        return "Passenger: " + this.email + this.name + this.phone + this.passengerId;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        
-        Passenger pas = (Passenger) o;
-        return Objects.equal(this.passengerId, pas.getPassengerId());
+        return "Passenger: " +" "+ this.name +" "+ this.passengerId +" "+  this.phone +" "+  this.email;
     }
 }

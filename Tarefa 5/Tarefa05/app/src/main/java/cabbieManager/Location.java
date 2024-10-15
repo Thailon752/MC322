@@ -1,72 +1,65 @@
 package cabbieManager;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
-
-@XmlType(name="location")
-@XmlEnum
+/**
+     * Uma tabela de localizações com coordenadas X e Y.
+     * 
+     * Ela sera usada para calcular a distancias entre os destinos.
+     * 
+     */
 public enum Location {
     
-    AEROPORTO(5, 18, "Aeroporto"),
-    ESTACAO_DE_TREM(12, 15, "Estação de Trem"),
-    SHOPPING(20, 7, "Shopping"),
-    ESCOLA(6, 23, "Escola"),
-    PARQUE(0, 4, "Parque"),
-    HOSPITAL(15, 12, "Hospital"),
-    BIBLIOTECA(3, 19, "Biblioteca"),
-    ESTADIO(22, 25, "Estadio");
+    // IMPLEMENTAÇÃO ENUM LOCATION
+    
+    AEROPORTO("Aeroporto", 5, 18),
+    ESTACAODETREM("Estação de Trem", 12, 8),
+    SHOPPING("Shopping", 20, 7),
+    ESCOLA("Escola", 6, 23),
+    PARQUE("Parque", 0, 4),
+    HOSPITAL("Hospital", 15, 11),
+    BIBLIOTECA("Biblioteca", 3, 19),
+    ESTADIO("Estádio", 22, 25);
 
-    private final int x;
-    private final int y;
-    private final String name;
-
-    Location(int x, int y, String name) {
-        this.x = x;
-        this.y = y;
-        this.name = name;
-    }
+    private final String nome;
+    private final int coordenadaX;
+    private final int coordenadaY;
 
     /**
-     * Returns the Location enum value of the given name.
-     *
-     * @param name the name of the location
-     * @return the Location enum value of the given name
+     * Construtor do enum.
+     * @param nome nome da localização.
+     * @param x coordenada X no plano.
+     * @param y coordenada Y no plano.
      */
-    public static Location valueOfName(String name) {
-        for (Location location : Location.values()) {
-            if (location.name.equals(name)) {
-                return location;
-            }
-        }
-        return null;
+
+    Location(String nome,int x, int y){
+        this.nome =  nome;
+        this.coordenadaX = x;
+        this.coordenadaY = y;
 
     }
-
-
     /**
-     * Returns the x-coordinate of the location.
-     * @return the x-coordinate of the location
+     * Pega o atributo nome da Localização.
+     * @return retorna uma String com o nome da localização.
      */
-    public int getX() {
-        return this.x;
+    public String getNome() {
+        return nome;
     }
-
-
     /**
-     * Returns the y-coordinate of the location.
-     * @return the y-coordinate of the location
+     * Pega o atributo coordenada X da Localização.
+     * @return retorna um int com o valor da coordenada X da localização.
      */
-    public int getY() {
-        return this.y;
+    public int getCoordenadaX() {
+        return coordenadaX;
     }
-
     /**
-     * Returns the name of the location.
-     * @return the name of the location
+     * Pega o atributo coordenada Y da Localização.
+     * @return retorna um int com o valor da coordenada Y da localização.
      */
-    public String getName() {
-        return this.name;
+    public int getCoordenadaY() {
+        return coordenadaY;
     }
 
 
+
+
+    
 }

@@ -1,15 +1,15 @@
 package exceptions;
-
-//Implement Exception
 /**
- * Exceção que lida com o erro de ser dado um Objeto não suportado pelo banco de dados.
+ * Exceção que lida com o erro de dar um metodo de pagamento que não é suportado.
  */
-public class UnsupportedObjectTypeException extends Exception {
+
+
+public class InvalidPaymentMethodException extends IllegalArgumentException {
     /**
      * Construtor da exceção com mensagem
      * @param message mensagem a ser dada caso a Exceção aconteça.
      */
-    public UnsupportedObjectTypeException(String message){
+    public InvalidPaymentMethodException(String message){
         super(message);
     }
     /**
@@ -17,7 +17,7 @@ public class UnsupportedObjectTypeException extends Exception {
      * @param message String a ser mostrada caso a condição seja atendida.
      * @param causa exceção que sera dada como condição.
      */
-    public UnsupportedObjectTypeException(String message,Throwable cause){
-        super(message,cause);
+    public InvalidPaymentMethodException(String message, Throwable causa){
+        super(message,causa);
     }
-} 
+}

@@ -1,30 +1,168 @@
-
 package cabbieManager;
-
-import com.google.common.base.Objects;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+import com.google.common.collect.Interner;
 
 import utils.CabbieInfoGenerator;
 
-@XmlRootElement(name="cabbie")
+/**
+ * O objeto Cabbie funciona como um motorista no programa.
+ * Ele é uma extensão de Person que tem nome,phone e email.
+ * E tem seus atributos próprios como cabbieId,rating,licenseNumber e status.
+ * O cabbieID é para identificar ele de outro Cabbie com mesmo nome.
+ * O ranting é a nota que ele teria no nosso programa, essa nota é dada pelos passengers.
+ * O LicenseNumber é a licensa que pode ser validada dentro de um banco de dados, para saber se ele ta apto.
+ * a ser motorista(Isso não foi implementado ainda, mas é por isso que o atributo existe).
+ * O status é algo fluido que vai ser atualizado como True quando ele está com passagers e False quando não esta.
+ * é mais para dizer sobre a disponibilidade dele para aceitar uma corrida que foi pedida.
+ * A função dele é fazer uma corrida de um ponto a outro.
+ */
+@XmlRootElement(name = "Cabbie")
+@XmlType(propOrder = {"name","cabbieId","rating", "phone","email","licenseNumber","status"})
 public class Cabbie extends Person{
     private String cabbieId;
-    private float rate;
+    private float rating;
     private String licenseNumber;
-    private boolean isBusy;
-    private String name;
-
-    public Cabbie() {
+    private boolean status;
+    
+    public Cabbie(){
+        
     }
+    
+     /**
+     * Pega o atributo de Cabbie cabbieId.
+     * @return uma String cabbieId.
+     */
+    @XmlElement(name = "cabbieId")
+    public String getcabbieId() {
+        return this.cabbieId;
+    }
+    /**
+     * Seta o cabbieId do Cabbie.
+     * @param cabbieId String que sera colocada no cabbieId.
+     */
+    public void setcabbieId(String cabbieId) {
+        this.cabbieId = cabbieId;
+    }
+     /**
+     * Pega o atributo de Cabbie rating.
+     * @return um float rating.
+     */
+    @XmlElement
+    public float getrating() {
+        return this.rating;
+    }
+    /**
+     * Seta o rating do Cabbie.
+     * @param rating float que sera atribuido ao ranting.
+     */
+    public void setrating(float rating) {
+        this.rating = rating;
+    }
+     /**
+     * Pega o atributo de Cabbie status.
+     * @return um boolean status.
+     */
+    @XmlElement
+    public boolean getstatus(){
+        return this.status;
+    }
+    /**
+     * Seta o status do Cabbie.
+     * @param status boolean que vai ser colocado no status.
+     */
+    public void setstatus(boolean status) {
+        this.status = status;
+    }
+    /**
+     * Pega o atributo nome.
+     * @return uma String name da pessoa.
+     */
+    @XmlElement
+    public String getname(){
+        return this.name;
+    }
+    /**
+     * Seta o name do Cabbie.
+     * @param name String que vai ser colocado no status.
+     */
+    public void setname(String name) {
+        this.name = name;
+    }
+    /**
+     * Pega o atributo email.
+     * @return uma String email da pessoa.
+     */
+    @XmlElement(name = "email")
+    public String getemail(){
+        return this.email;
+    }
+    /**
+     * Seta o email do Cabbie.
+     * @param email String que sera colocada no email.
+     */
+    public void setemail(String email) {
+        this.email = email;
+    }
+    /**
+     * Pega o atributo phone.
+     * @return uma String phone da pessoa.
+     */
+    @XmlElement
+    public String getphone(){
+        return this.phone;
+    }
+    /**
+     * Seta o phone do Cabbie.
+     * @param phone String que sera colocada no phone.
+     */
+    public void setphone(String phone) {
+        this.phone = phone;
+    }
+     /**
+     * Pega o atributo de Cabbie licenseNumber.
+     * @return uma String licenseNumber.
+     */
+    @XmlElement(name = "licenseNumber")
+    public String getlicenseNumber(){
+       return this.licenseNumber;
+    }
+    /**
+     * Seta licenseNumber do Cabbie.
+     * @param licenseNumber String que sera colocada no licenseNumber.
+     */
+    public void setlicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+    /**
+     * Seta o rating do taxista
+     * @param avalia parametro float que é a nota que ele recebeu pela corrida.
+     * O parametro pode variar de 0-5.
+     * Chama a função privada caclularanting dando o parametro avalia para ela.
+     */
+    public void setaval(float avalia){
+        this.rating =calcularating(avalia);
+    }
+    /**
+     * Calcula o ranting novo.
+     * @param avalia parametro float que é a nota que ele recebeu pela corrida.
+     * O parametro pode variar de 0-5.
+     * A função calcula fazendo uma média simples com o valor do rating antigo e a nota nova.
+     */
+    private float calcularating(float avalia){
+        return ((this.rating+avalia)/2);
+
+    }
+    
 
     
     /**
-     * Registers a cabbie by generating random information.
-     * This method assigns a random name, email, phone number, cabbie ID, rate and
-     * license number to the cabbie.
-     * 
+     * Registra um taxista gerando informações aleatórias.
+     * Este método atribui um nome, email, número de telefone, ID do taxista,
+     * nota e número da licença aleatórios ao taxista.
+     * E gera um printe de saida mostrando que ele foi gerado.
      */
     @Override
     public void register() {
@@ -34,30 +172,29 @@ public class Cabbie extends Person{
         this.email = cab.getEmail();
         this.phone = cab.getPhone();
         this.cabbieId = cab.getCabbieId();
-        this.rate = cab.getRate();
+        this.rating = cab.getRate();
         this.licenseNumber = cab.getLicenseNumber();
-        this.isBusy = false;
         System.out.println("Pessoa motorista " + this.cabbieId + " (" + this.name + ") criada com sucesso");
     
     }
 
     /**
-     * Updates a field of the cabbie.
+     * Atualiza um campo do taxista.
      * 
-     * @param field The field to be updated.
-     * @param newValue The new value for the field.
+     * @param field O campo a ser atualizado.
+     * @param newValue O novo valor para o campo.
      * 
-     * The valid fields are:
+     * Os campos válidos são:
      * <ul>
      * <li>name</li>
-     * <li>email</li>
+     * <li>email</li> 
      * <li>phone</li>
      * <li>cabbieId</li>
      * <li>rate</li>
      * <li>licenseNumber</li>
      * </ul>
      * 
-     * If the field is not valid, a message is printed and the field is not updated.
+     * Se o campo não for válido, uma mensagem é exibida e o campo não é atualizado.
      */
     @Override
     public void update(String field, String newValue){
@@ -66,25 +203,36 @@ public class Cabbie extends Person{
 
         switch (field) {
             case "name":
-                this.name = newValue;
+                if(e_nome(newValue)){
+                    this.name = newValue;
+                }
+                else{
+                    throw new NumberFormatException("O nome não pode conter numeros");
+                }
+                
                 break;
             case "email":
                 this.email = newValue;
                 break;
             case "phone":
-                this.setPhone(newValue);
+
+                try{
+                    Integer.parseInt(newValue);
+                    this.phone = newValue;
+                }
+                catch(NumberFormatException e){
+                    throw new NumberFormatException("Input contains non-numeric characters: " + newValue);
+                }
+                
                 break;
             case "cabbieId":
                 this.cabbieId = newValue;
                 break;
             case "rate":
-                this.rate = Float.parseFloat(newValue);
+                this.rating = Float.parseFloat(newValue);
                 break;
             case "licenseNumber":
                 this.licenseNumber = newValue;
-                break;
-            case "isBusy":
-                this.isBusy = Boolean.parseBoolean(newValue);
                 break;
             default:
                 validField = false;
@@ -96,94 +244,49 @@ public class Cabbie extends Person{
             System.out.println("Campo " + field + " foi atualizado com sucesso!");
         }
 
-        return;
     }
-    
-    
+    private boolean e_nome(String name){
+        int i = 0;
+        char letra = name.charAt(i);
+        while (letra != '\0') {
+            try{
+                Integer.parseInt(String.valueOf(letra));
+                return false;
+            }
+            catch(NumberFormatException e){
+                i++;
+            }
+        }
+        return true;
+    }
+
     /**
-     * Gets the ID of the cabbie.
-     * 
-     * @return the ID of the cabbie (a UUID)
+     * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
+     * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.
+     * @return A função retorna verdadeiro ou falso dependendo do objeto dado.
+     * Caso seja um objeto igual é verdadeiro, caso seja de outra classe ou outro objeto da mesma classe retorna falso.
      */
-    @XmlElement(name = "cabbieId")
-    public String getCabbieId() {
-        return this.cabbieId;
+    @Override
+    public boolean isequals(Object clas){
+        if (this.getClass().equals(clas.getClass())){
+            Cabbie prov = (Cabbie) clas;
+            if(this.cabbieId.equalsIgnoreCase(prov.getcabbieId())){
+                return true;
+            }
+        }
+        return false;
     }
-    
-    public void setCabbieId(String cabbieId) {
-        this.cabbieId = cabbieId;
-    }
-
-    @XmlElement(name = "name")
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-
-    @XmlElement(name = "isBusy")
-    public boolean getIsBusy(){
-        return this.isBusy;
-    }
-
-    public void setIsBusy(boolean value){
-        this.isBusy = value;
-    }
-    @XmlElement(name = "rate")
-    public float getRate() {
-        return rate;
-    }
+   
 
     /**
-     * Sets the phone number of the cabbie.
+     * Retorna uma representação em string do objeto.
      * 
-     * @param phone the phone number
+     * O formato é: "nome identidade numero de licensa nota telefone e email".
      * 
-     * The phone number must contain only numeric characters.
-
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-
-    @XmlElement(name = "licenseNumber")
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
-
-    /**
-     * Returns a string representation of the object.
-     * 
-     * The format is: "email name phone cabbieId rate licenseNumber"
-     * 
-     * @return a string representation of the object
+     * @return uma representação em string do objeto.
      */
     @Override
     public String toString() {
-        return "Cabbie:" + this.cabbieId + this.name;
+        return "Cabbie: "+" "+this.name+" "+this.cabbieId+" "+this.licenseNumber+" "+this.rating+" "+this.phone+" "+this.email;
     }
-
-    @Override
-    public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        
-        Cabbie pas = (Cabbie) o;
-        return Objects.equal(this.cabbieId, pas.getCabbieId());
-    }
-
 }
