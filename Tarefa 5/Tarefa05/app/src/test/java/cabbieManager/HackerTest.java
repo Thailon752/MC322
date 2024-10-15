@@ -123,12 +123,82 @@ public class HackerTest {
     
     
     }
+        /**
+     * Tests if the constructor RidePayment throws an InvalidPaymentMethodException 
+     * when an unsupported payment method is used.
+     * 
+     * The constructor RidePayment should throw an InvalidPaymentMethodException when
+     * the payment method is not one of the supported types.
+     * 
+     * This test case tests this by calling the constructor with an unsupported payment method 
+     * and asserting that an InvalidPaymentMethodException is thrown.
+     * The expected error message is "The PaymentMethod Cash is not supported".
+     */
     @Test
     public void test_method(){
         Exception exception = assertThrows(InvalidPaymentMethodException.class, () -> {
             RidePayment rp = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 3.0f, "Cash");
         });
         assertEquals("The PaymentMethod Cash is not suported", exception.getMessage());
+    }
+
+    /**
+     * Tests if the method update from the class Cabbie throws a LetterFormatException 
+     * when the name contains non-letter characters.
+     * 
+     * The method update should throw a LetterFormatException when the name is invalid.
+     * This test case tests this by calling the update method with a name containing numeric characters 
+     * and asserting that a LetterFormatException is thrown.
+     * The expected error message is "Input contains non-letter characters".
+     */
+    @Test
+    public void test_name() {
+        Exception exception2 = assertThrows(LetterFormatException.class, () -> {
+            Cabbie cb = new Cabbie();
+            cb.update("name", "joao1"); // Passa um nome inválido contendo um número
+        });
+    
+        assertEquals("Input contains non-letter characters", exception2.getMessage());
+    }
+
+    /**
+     * Tests if the method updateVehicle throws a CarrovelhoException when the 
+     * year provided for the vehicle is too old or incorrectly formatted.
+     * 
+     * The method updateVehicle should throw a CarrovelhoException when the year 
+     * is invalid (e.g., the year is too far in the past or improperly formatted).
+     * This test case tests this by calling updateVehicle with an invalid year 
+     * and asserting that a CarrovelhoException is thrown.
+     * The expected error message is "data errada ou carro muito velho".
+     */
+    @Test
+    public void test_year() {
+        Exception exception = assertThrows(CarrovelhoException.class, () -> {
+            Vehicle ve = new Vehicle();
+            ve.updateVehicle("year", "199"); // Passa uma data inválida contendo um número
+        });
+    
+        assertEquals("data errada ou carro muito velho", exception.getMessage());
+    }
+
+    /**
+     * Tests if the method update from the class Cabbie throws an EmailFormatException 
+     * when the email provided is not in a valid format.
+     * 
+     * The method update should throw an EmailFormatException when the email 
+     * does not contain the necessary "@" symbol.
+     * This test case tests this by calling the update method with an invalid email 
+     * and asserting that an EmailFormatException is thrown.
+     * The expected error message is "Email invalido".
+     */
+    @Test
+    public void test_email() {
+        Exception exception = assertThrows(EmailFormatException.class, () -> {
+            Cabbie cb = new Cabbie();
+            cb.update("email", "thailonmendesgmail.com"); // Passa um email inválido sem o '@'
+        });
+    
+        assertEquals("Email invalido", exception.getMessage());
     }
 
 

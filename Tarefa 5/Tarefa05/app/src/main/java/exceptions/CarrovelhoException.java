@@ -2,12 +2,12 @@ package exceptions;
 
 import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
 
-public class LetterFormatException extends IllegalArgumentException{
+public class CarrovelhoException extends Exception{
     /**
      * Construtor da exceção com mensagem
      * @param message mensagem a ser dada caso a Exceção aconteça.
      */
-    public LetterFormatException(String message){
+    public CarrovelhoException(String message){
         super(message);
     }
      /**
@@ -15,11 +15,9 @@ public class LetterFormatException extends IllegalArgumentException{
      */
     @OverridingMethodsMustInvokeSuper
     public String getMessage(){
-        return "Input contains non-letter characters";
+        return "data errada ou carro muito velho";
 
     }
 }
-
-
 
 

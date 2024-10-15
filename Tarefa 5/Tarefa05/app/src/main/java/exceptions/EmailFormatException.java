@@ -2,12 +2,12 @@ package exceptions;
 
 import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
 
-public class LetterFormatException extends IllegalArgumentException{
+public class EmailFormatException extends IllegalArgumentException{
     /**
      * Construtor da exceção com mensagem
      * @param message mensagem a ser dada caso a Exceção aconteça.
      */
-    public LetterFormatException(String message){
+    public EmailFormatException(String message){
         super(message);
     }
      /**
@@ -15,11 +15,9 @@ public class LetterFormatException extends IllegalArgumentException{
      */
     @OverridingMethodsMustInvokeSuper
     public String getMessage(){
-        return "Input contains non-letter characters";
+        return "Email invalido";
 
     }
 }
-
-
 
 

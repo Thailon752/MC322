@@ -3,8 +3,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.google.common.collect.Interner;
-
+import exceptions.CarrovelhoException;
+import exceptions.EmailFormatException;
+import exceptions.LetterFormatException;
 import utils.CabbieInfoGenerator;
 
 /**
@@ -207,13 +208,18 @@ public class Cabbie extends Person{
                     this.name = newValue;
                 }
                 else{
-                    throw new NumberFormatException("O nome não pode conter numeros");
+                    throw new LetterFormatException("o nome não pode conter numeros");
                 }
                 
                 break;
             case "email":
-                this.email = newValue;
-                break;
+                if(e_email(newValue)){
+                    this.email = newValue;
+                }
+                else{
+                    throw new EmailFormatException("email invalido");
+                }
+                
             case "phone":
 
                 try{
@@ -245,21 +251,36 @@ public class Cabbie extends Person{
         }
 
     }
-    private boolean e_nome(String name){
-        int i = 0;
-        char letra = name.charAt(i);
-        while (letra != '\0') {
-            try{
-                Integer.parseInt(String.valueOf(letra));
+    /**
+     * Verifica se o nome fornecido contém apenas letras.
+     * 
+     * @param name O nome a ser verificado.
+     * @return true se o nome contiver apenas letras, false se houver qualquer outro caractere.
+     */
+    
+    private boolean e_nome(String name) {
+        for (char letra : name.toCharArray()) {
+            if (!Character.isLetter(letra)) {
                 return false;
-            }
-            catch(NumberFormatException e){
-                i++;
             }
         }
         return true;
     }
-
+    /**
+     * Verifica se o e-mail fornecido está no formato correto.
+     * 
+     * @param email O e-mail a ser verificado.
+     * @return true se o e-mail contiver "@" e for válido, false se não for.
+     */
+    private boolean e_email(String email) {
+        if (email != null && email.contains("@")) {
+            return true; // Retorna true se o e-mail contém '@'
+        }
+        return false; // Retorna false se não contém '@' ou é nulo
+    }
+    
+    
+    
     /**
      * Determina se o objeto dado como parametro é o mesmo que o objeto em si.
      * @param clas É um objeto genérico que pode ou não ser do tipo Cabbie.

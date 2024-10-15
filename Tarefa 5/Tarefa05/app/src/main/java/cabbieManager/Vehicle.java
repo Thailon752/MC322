@@ -6,6 +6,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import exceptions.CarrovelhoException;
+import exceptions.LetterFormatException;
+
 
 /**
  * Objeto usado para identificar o veiculo com o qual a corrida foi feita.
@@ -141,8 +144,9 @@ public class Vehicle {
      * </ul>
      * 
      * Se o campo selecionado não é válido é printado uma mensagem de campo invalido
+     * @throws CarrovelhoException 
      */
-    public void updateVehicle(String field, String newValue) {
+    public void updateVehicle(String field, String newValue) throws CarrovelhoException {
 
         boolean validField = true;
 
@@ -157,7 +161,13 @@ public class Vehicle {
                 this.model = newValue;
                 break;
             case "year":
-                this.year = Integer.parseInt(newValue);
+                if(e_year(newValue)){
+                    this.year = Integer.parseInt(newValue);
+                }
+                else{
+                    throw new CarrovelhoException("data errada ou carro muito velho");
+                }
+                
                 break;
             default:
                 validField = false;
@@ -197,6 +207,28 @@ public class Vehicle {
             }
         }
         return false;
+    }
+    /**
+     * Verifica se o ano fornecido está dentro de um intervalo de idade permitido.
+     * 
+     * O método converte o ano de fabricação fornecido (em formato String) para um inteiro
+     * e calcula a diferença entre o ano atual (2024) e o ano fornecido.
+     * Se a diferença for menor que 74 anos, o método retorna true, 
+     * indicando que o veículo ainda está dentro do intervalo de idade permitido.
+     * Caso contrário, retorna false.
+     * 
+     * @param year O ano de fabricação do veículo como String.
+     * @return true se a diferença entre 2024 e o ano de fabricação for menor que 74, false caso contrário.
+     * @throws NumberFormatException se o valor fornecido não puder ser convertido para um número inteiro.
+     */
+    private boolean e_year(String year){
+        int yearint = Integer.parseInt(year);
+        if((2024-yearint) < 74){
+            return true;
+
+        }else{
+            return false;
+        }
     }
 
     
