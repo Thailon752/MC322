@@ -4,7 +4,7 @@ package exceptions;
  */
 
 
-public class InvalidPaymentMethodException extends IllegalArgumentException {
+public class InvalidPaymentMethodException extends RuntimeException{
     /**
      * Construtor da exceção com mensagem
      * @param message mensagem a ser dada caso a Exceção aconteça.

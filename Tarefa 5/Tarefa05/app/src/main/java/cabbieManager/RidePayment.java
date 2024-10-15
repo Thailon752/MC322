@@ -71,7 +71,7 @@ public class RidePayment implements Payment{
             this.paymentId = UUID.randomUUID().toString();
             calcula_value();
             System.out.printf("Valor da corrida: %.2f\n", this.amount);
-        } catch (InvalidPaymentMethodException e) {
+        } catch (IllegalArgumentException e) {
             throw new InvalidPaymentMethodException("The PaymentMethod"+ metodopag + "is not suported");
         }
     }  
