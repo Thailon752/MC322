@@ -123,6 +123,13 @@ public class HackerTest {
     
     
     }
+    @Test
+    public void test_method(){
+        Exception exception = assertThrows(InvalidPaymentMethodException.class, () -> {
+            RidePayment rp = new RidePayment("rideId", LocalDateTime.of(2022, 1, 1, 10, 0), 3.0f, "Cash");
+        });
+        assertEquals("The PaymentMethod Cash is not suported", exception.getMessage());
+    }
 
 
 
