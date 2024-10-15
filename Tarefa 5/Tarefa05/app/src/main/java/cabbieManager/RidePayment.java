@@ -72,7 +72,7 @@ public class RidePayment implements Payment{
             calcula_value();
             System.out.printf("Valor da corrida: %.2f\n", this.amount);
         } catch (IllegalArgumentException e) {
-            throw new InvalidPaymentMethodException("The PaymentMethod"+ metodopag + "is not suported");
+            throw new InvalidPaymentMethodException("The PaymentMethod "+ metodopag + " is not suported");
         }
     }  
 
