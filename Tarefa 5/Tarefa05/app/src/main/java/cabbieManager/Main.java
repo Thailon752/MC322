@@ -1,7 +1,4 @@
 package cabbieManager;
-
-
-
 import databaseManager.Database;
 
 /**
