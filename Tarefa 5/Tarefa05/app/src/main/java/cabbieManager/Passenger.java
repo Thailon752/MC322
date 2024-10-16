@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import exceptions.EmailFormatException;
 import utils.PassengerInfoGenerator;
 /**
  * O objeto passenger funciona como passageiro no nosso programa.
@@ -52,7 +53,7 @@ public class Passenger extends Person{
      * 
      * Se o campo não for válido, uma mensagem é exibida e o campo não é atualizado.
      */
-    @Override
+   @Override
     public void update(String field, String newValue){
 
         boolean validField = true;
@@ -62,8 +63,13 @@ public class Passenger extends Person{
                 this.name = newValue;
                 break;
             case "email":
-                this.email = newValue;
-                break;
+                if(e_email(newValue)){
+                    this.email = newValue;
+                }
+                else{
+                    throw new EmailFormatException("email invalido");
+                }
+                
             case "phone":
                 this.phone = newValue;
                 break;
@@ -80,6 +86,18 @@ public class Passenger extends Person{
         }
 
     
+    }
+    /**
+     * Verifica se o e-mail fornecido está no formato correto.
+     * 
+     * @param email O e-mail a ser verificado.
+     * @return true se o e-mail contiver "@" e for válido, false se não for.
+     */
+    private boolean e_email(String email) {
+        if (email != null && email.contains("@")) {
+            return true; // Retorna true se o e-mail contém '@'
+        }
+        return false; // Retorna false se não contém '@' ou é nulo
     }
     /**
      * Pega o atributo nome.

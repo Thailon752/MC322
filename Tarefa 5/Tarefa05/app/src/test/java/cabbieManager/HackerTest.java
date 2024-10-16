@@ -187,8 +187,8 @@ public class HackerTest {
     @Test
     public void test_email() {
         Exception exception = assertThrows(EmailFormatException.class, () -> {
-            Cabbie cb = new Cabbie();
-            cb.update("email", "thailonmendesgmail.com"); // Passa um email inválido sem o '@'
+            Passenger pb = new Passenger();
+            pb.update("email", "thailonmendesgmail.com"); // Passa um email inválido sem o '@'
         });
     
         assertEquals("Email invalido", exception.getMessage());
