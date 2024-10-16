@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
- * Person é um objeto abstrato que tem suas extensões Passenger e Cabbie
+ * Person é um objeto abstrato que tem suas extensões Passenger e Cabbie.
  * Tem seus atributos que vão ser compartilhados com as extenções
  * e eles são nome,email e phone.
  */

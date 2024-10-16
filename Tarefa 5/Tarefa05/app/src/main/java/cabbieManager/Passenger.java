@@ -38,7 +38,7 @@ public class Passenger extends Person{
     
     }
     /**
-     * Atualiza um campo do passageiro.
+     * Atualiza um atributo do passageiro.
      * 
      * @param field O campo a ser atualizado.
      * @param newValue O novo valor para o campo.

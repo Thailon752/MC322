@@ -45,6 +45,11 @@ public class RidePayment implements Payment{
 
        
     // IMPLEMENTAR CONSTRUTUOR DA CLASS
+  
+    
+    public RidePayment(){
+
+    }
     /**
      * O construtor recebe o id corrida a data e hora, a distancia e o metodo de pagamento.
      * @param corridaid id da corrida a ser paga.
@@ -55,10 +60,6 @@ public class RidePayment implements Payment{
      * Dentro do construtor já é definido também o id do objeto pela biblioteca UUID.
      * Gera algumas saidas para melhor comunicação como a forma do pagamento e o valor a ser pago.
      */
-    
-    public RidePayment(){
-
-    }
 
     public RidePayment(String corridId, LocalDateTime datahora, float distancia, String metodopag) throws InvalidRideDistanceException, InvalidPaymentMethodException {
         try {

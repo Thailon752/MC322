@@ -200,7 +200,7 @@ public class Ride {
     }
 
     /**
-     * Normaliza a String dada para melhorar ser mais facil ser reconhecida.
+     * Normaliza a String dada para ser mais facil ser reconhecida.
      * Método para normalizar o nome da localização (remover acentos e espaços)
      * @param locationName String com o nome do metodo para ser normalizado
      * @return uma String normalizada.

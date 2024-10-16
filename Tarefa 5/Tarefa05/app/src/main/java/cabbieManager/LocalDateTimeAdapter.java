@@ -20,7 +20,7 @@ public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
         return (v != null) ? LocalDateTime.parse(v, formatter) : null;
     }
     /**
-     * Transforma a String em LocalDateTime
+     * Transforma a LocalDateTime em String
      * @param v LocalDateTime para ser transformado
      * @return String com o formato dd-MM-yyyy HH:mm
      */
